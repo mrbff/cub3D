@@ -2,6 +2,6 @@
 
 Clone with:
 ```
-git clone --recurse-submodules https://github.com/mrbff/cub3D.git
+git clone --recurse-submodules git@github.com:mrbff/cub3D.git
 ```
 
