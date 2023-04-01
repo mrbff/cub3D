@@ -6,15 +6,14 @@
 /*   By: mbozzi <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/31 18:53:31 by mbozzi            #+#    #+#             */
-/*   Updated: 2023/04/01 16:14:22 by mbozzi           ###   ########.fr       */
+/*   Updated: 2023/04/01 17:39:42 by mbozzi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../cube3D.h"
 
-void	game_init(t_cube **cb, char **av)
+void	game_init(t_cube **cb)
 {
-	(*cb)->path = ft_strjoin("./Maps/", av[1]);
 	(*cb)->mlx = mlx_init();
 	(*cb)->mlx_win = mlx_new_window((*cb)->mlx, WIN_WID, WIN_HGT, "cube3D");
 }
@@ -25,12 +24,12 @@ int	main(int ac, char **av)
 
 	(void)ac;
 	cb = malloc(sizeof(t_cube));
+	cb->path = ft_strjoin("./Maps/", av[1]);
 	if (check_map(&cb, cb->path) == 1)
 		return (0);
-	game_init(&cb, av);
+	game_init(&cb);
 	//mlx_loop(ptr->mlx);
 }
-
 
 //	TO DO //
 
