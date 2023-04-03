@@ -6,7 +6,7 @@
 /*   By: mbozzi <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/31 18:16:05 by mbozzi            #+#    #+#             */
-/*   Updated: 2023/04/01 16:12:10 by mbozzi           ###   ########.fr       */
+/*   Updated: 2023/04/03 14:51:58 by mbozzi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,14 +22,70 @@
 # include <stdlib.h>
 # include <stdio.h>
 # include <string.h>
+# include <math.h>
 
 # define WIN_WID 1200
 # define WIN_HGT 720
+# define FOV 0.66
+
 # define ESC 65307
 # define ARROW_UP 119
 # define ARROW_DOWN 115
 # define ARROW_LEFT 97
 # define ARROW_RIGHT 100
+
+# define PI 3.14159
+# define MOVSPEED 0.1
+# define ROTSPEED 0.05
+
+/* # define EAST 0
+# define NORD PI / 2
+# define WEST PI
+# define SUD  PI / 2 * 3
+ */
+
+typedef struct s_color {
+	int			r;
+	int			g;
+	int			b;
+}				t_color;
+
+typedef struct s_dir
+{
+	double 		x;
+	double		y;
+}				t_dir;
+
+typedef struct s_pos
+{
+	double 		x;
+	double		y;
+}				t_pos;
+
+typedef struct  s_ray {
+	t_pos		pos;
+	t_dir		dir;
+	double		distx;
+	double		disty;
+	double		deltax;
+	double		deltay;
+	double		stepx;
+	double		stepy;
+	double		wall_dist;
+	int			side;
+}				t_ray;
+
+typedef struct s_camera {
+	t_pos		pos;
+	t_dir		dir;
+	double		x;
+	double		y;
+}				t_camera;
+
+typedef struct	s_player {
+	t_pos		pos;
+	double		dir;
+}				t_player;
 
 typedef struct s_matrix {
 	char		**mat;
@@ -56,6 +112,9 @@ typedef struct s_cube
 	void		*mlx;
 	t_matrix	map;
 	char		*path;
+	t_player	player;
+	t_camera 	cam;
+	t_ray		ray;
 }	t_cube;
 
 //				MAP				//
@@ -65,7 +124,9 @@ int		check_map(t_cube **cb, char *path);
 
 //				GAME			//
 
-int		ft_key_hook(int keycode, t_cube *ptr);
+int		ft_key_hook(int keycode, t_cube **cb);
+void	raycasting(t_cube **cb);
+void	put_floor_sky(t_cube **cb);
 
 //				UTILS			//
 

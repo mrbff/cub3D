@@ -6,7 +6,7 @@
 /*   By: mbozzi <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/31 18:53:31 by mbozzi            #+#    #+#             */
-/*   Updated: 2023/04/01 17:39:42 by mbozzi           ###   ########.fr       */
+/*   Updated: 2023/04/03 16:17:40 by mbozzi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,9 @@ int	main(int ac, char **av)
 	if (check_map(&cb, cb->path) == 1)
 		return (0);
 	game_init(&cb);
-	//mlx_loop(ptr->mlx);
+	//mlx_key_hook(cb->mlx_win, ft_key_hook, &cb);
+	raycasting(&cb);
+	mlx_loop(cb->mlx);
 }
 
 //	TO DO //
