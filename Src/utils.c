@@ -38,7 +38,6 @@ int	ft_destroy(t_cube *ptr)
 	mlx_destroy_display(ptr->mlx);
 	free(ptr->img);
 	free(ptr->mlx);
-	free(ptr);
 	exit(0);
 	return (0);
 }

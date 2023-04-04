@@ -26,7 +26,7 @@
 
 # define WIN_WID 1200
 # define WIN_HGT 720
-# define FOV 0.66
+//# define FOV 0.66
 
 # define ESC 65307
 # define ARROW_UP 119
@@ -34,7 +34,7 @@
 # define ARROW_LEFT 97
 # define ARROW_RIGHT 100
 
-# define PI 3.14159
+//# define PI 3.14159
 # define MOVSPEED 0.1
 # define ROTSPEED 0.05
 
@@ -50,6 +50,61 @@ typedef struct s_color {
 	int			b;
 }				t_color;
 
+typedef struct s_matrix {
+	char		**mat;
+	char		*line;
+	int			lines;
+	int			fd;
+	int			x;
+	int			y;
+}				t_matrix;
+
+typedef struct s_img
+{
+	void	*mlx_img;
+	char	*data;
+	int		bits_per_pixel;
+	int		line_length;
+	int		endian;
+}	t_img;
+
+typedef struct s_xy
+{
+	double		x;
+	double		y;
+}				t_xy;
+
+typedef struct	s_cube
+{	t_img		*img;
+	void		*mlx_win;
+	void		*mlx;
+	
+	t_matrix	map;
+	char		*path;
+	
+	t_xy		pos;
+	t_xy		dir;
+	t_xy		plane;
+}				t_cube;
+
+//				MAP				//
+
+int		ft_matrix(t_cube **cb, char *path);
+int		check_map(t_cube **cb, char *path);
+
+//				GAME			//
+
+int		ft_key_hook(int keycode, t_cube *cb);
+void	raycasting(t_cube *cb);
+void	put_floor_sky(t_cube *cb);
+void	ft_draw_pixels(int x, int y, int color, t_cube *cb);
+
+//				UTILS			//
+
+int		ft_destroy(t_cube *ptr);
+
+#endif
+/*
 typedef struct s_dir
 {
 	double		x;
@@ -117,21 +172,4 @@ typedef struct s_cube
 	t_ray		ray;
 	t_dir		plane;
 }	t_cube;
-
-//				MAP				//
-
-int		ft_matrix(t_cube **cb, char *path);
-int		check_map(t_cube **cb, char *path);
-
-//				GAME			//
-
-int		ft_key_hook(int keycode, t_cube **cb);
-void	raycasting(t_cube **cb);
-void	put_floor_sky(t_cube **cb);
-void	ft_draw_pixels(int x, int y, int color, t_cube *cb);
-
-//				UTILS			//
-
-int		ft_destroy(t_cube *ptr);
-
-#endif
+*/

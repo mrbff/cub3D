@@ -47,9 +47,8 @@ int	lines_controll(t_cube **cb, int x, int y, int len)
 			else if ((*cb)->map.mat[x][y] == 'N' || (*cb)->map.mat[x][y] == 'S'
 				|| (*cb)->map.mat[x][y] == 'E' || (*cb)->map.mat[x][y] == 'W')
 			{
-				(*cb)->player.pos.x = (double)x;
-				(*cb)->player.pos.y = (double)y;
-				(*cb)->player.dir = 0;
+				(*cb)->pos.x = (double)x;
+				(*cb)->pos.y = (double)y;
 			}
 			y++;
 		}

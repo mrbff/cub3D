@@ -12,49 +12,43 @@
 
 #include "../cube3D.h"
 
-int	ft_key_hook(int keycode, t_cube **cb)
+int	ft_key_hook(int keycode, t_cube *cb)
 {
-	double	oldx;
+	double	old;
 
-	oldx = (*cb)->ray.dir.x;
-	
-	if (keycode == ARROW_UP && (*cb)->map.mat[(int)(*cb)->player.pos.x - 1][(int)(*cb)->player.pos.y] != '1')
-		(*cb)->player.pos.x -= 1 * MOVSPEED;
-	else if (keycode == ARROW_DOWN && (*cb)->map.mat[(int)(*cb)->player.pos.x + 1][(int)(*cb)->player.pos.y] != '1')
-		(*cb)->player.pos.x += 1 * MOVSPEED;
+	old = cb->dir.x;
+	if (keycode == ESC)
+		ft_destroy(cb);
+	else if (keycode == ARROW_UP)
+	{
+		if (!cb->map.mat[(int)(cb->pos.x + cb->dir.x * MOVSPEED)][(int)cb->pos.y])
+			cb->pos.x += cb->dir.x * MOVSPEED;
+		if (!cb->map.mat[(int)cb->pos.x][(int)(cb->pos.y + cb->dir.x * MOVSPEED)])
+			cb->pos.y += cb->dir.y * MOVSPEED;
+	}
+	else if (keycode == ARROW_DOWN)
+	{
+		if (!cb->map.mat[(int)(cb->pos.x - cb->dir.x * MOVSPEED)][(int)cb->pos.y])
+			cb->pos.x -= cb->dir.x * MOVSPEED;
+		if (!cb->map.mat[(int)cb->pos.x][(int)(cb->pos.y - cb->dir.x * MOVSPEED)])
+			cb->pos.y -= cb->dir.y * MOVSPEED;
+	}
 	else if (keycode == 97)
 	{
-		(*cb)->ray.dir.x = (*cb)->ray.dir.x * cos(ROTSPEED) - (*cb)->ray.dir.y * sin(ROTSPEED);
-		(*cb)->ray.dir.y = oldx * sin(ROTSPEED) + (*cb)->ray.dir.y * cos(ROTSPEED);
-		oldx = (*cb)->plane.x;
-		(*cb)->plane.x = (*cb)->plane.x * cos(ROTSPEED) - (*cb)->plane.y * sin(ROTSPEED);
-		(*cb)->plane.y = oldx * sin(ROTSPEED) + (*cb)->plane.y * cos(ROTSPEED);
+		cb->dir.x = cb->dir.x * cos(ROTSPEED) - cb->dir.y * sin(ROTSPEED);
+		cb->dir.y = old * sin(ROTSPEED) + cb->dir.y * cos(ROTSPEED);
+		old = cb->plane.x;
+		cb->plane.x = cb->plane.x * cos(ROTSPEED) - cb->plane.y * sin(ROTSPEED);
+		cb->plane.y = old * sin(ROTSPEED) + cb->plane.y * cos(ROTSPEED);
 	}
 	else if (keycode == 100)
 	{
-		(*cb)->ray.dir.x = (*cb)->ray.dir.x * cos(-ROTSPEED) - (*cb)->ray.dir.y * sin(-ROTSPEED);
-		(*cb)->ray.dir.y = oldx * sin(-ROTSPEED) + (*cb)->ray.dir.y * cos(-ROTSPEED);
-		oldx = (*cb)->plane.x;
-		(*cb)->plane.x = (*cb)->plane.x * cos(-ROTSPEED) - (*cb)->plane.y * sin(-ROTSPEED);
-		(*cb)->plane.y = oldx * sin(-ROTSPEED) + (*cb)->plane.y * cos(-ROTSPEED);
+		cb->dir.x = cb->dir.x * cos(-ROTSPEED) - cb->dir.y * sin(-ROTSPEED);
+		cb->dir.y = old * sin(-ROTSPEED) + cb->dir.y * cos(-ROTSPEED);
+		old = cb->plane.x;
+		cb->plane.x = cb->plane.x * cos(-ROTSPEED) - cb->plane.y * sin(-ROTSPEED);
+		cb->plane.y = old * sin(-ROTSPEED) + cb->plane.y * cos(-ROTSPEED);
 	}
-/*	else if (keycode == 65361)
-	{
-		(*cb)->player.pos.x = (*cb)->player.pos.x * cos(ROTSPEED) - (*cb)->player.pos.y * sin(ROTSPEED);
-		(*cb)->player.pos.y = (*cb)->player.pos.x * sin(ROTSPEED) + (*cb)->player.pos.y * cos(ROTSPEED);
-	}
-	else if (keycode == 65363)
-	{
-		(*cb)->player.pos.x = (*cb)->player.pos.x * cos(ROTSPEED) + (*cb)->player.pos.y * sin(ROTSPEED);
-		(*cb)->player.pos.y = (*cb)->player.pos.x * sin(ROTSPEED) - (*cb)->player.pos.y * cos(ROTSPEED);
-	}*/
-	/*else if (keycode == ARROW_LEFT)
-		ptr->x_min = ptr->x_min - ptr->display_shift;
-	else if (keycode == ARROW_RIGHT)
-		ptr->x_min = ptr->x_min + ptr->display_shift;
-	else if (keycode == KEY_I)
-		ptr->incr_iter = !ptr->incr_iter;
-//	ft_put_image_to_window(ptr);*/
 	raycasting(cb);
 	ft_printf("keycode = %d\n", keycode);
 	return (0);
