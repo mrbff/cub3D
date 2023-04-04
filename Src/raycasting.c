@@ -120,10 +120,8 @@ void	raycasting(t_cube **cb)
 	while (++col < WIN_WID)
 	{
 		(*cb)->cam.x = 2 * col / (double)WIN_WID - 1;
-		(*cb)->ray.pos.x = -0.5;
-		(*cb)->ray.pos.y = 0;
-		(*cb)->ray.dir.x = (*cb)->ray.pos.x + 0 * (*cb)->cam.x;
-		(*cb)->ray.dir.y = (*cb)->ray.pos.y + FOV * (*cb)->cam.x;
+		(*cb)->ray.dir.x = (*cb)->ray.dir.x + (*cb)->plane.x * (*cb)->cam.x;
+		(*cb)->ray.dir.y = (*cb)->ray.dir.y + (*cb)->plane.y * (*cb)->cam.x;
 		(*cb)->ray.deltax = fabs(1 / (*cb)->ray.dir.x);
 		(*cb)->ray.deltay = fabs(1 / (*cb)->ray.dir.y);
 		x = (int)(*cb)->player.pos.x;

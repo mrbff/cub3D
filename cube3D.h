@@ -42,7 +42,7 @@
 # define NORD PI / 2
 # define WEST PI
 # define SUD  PI / 2 * 3
- */
+*/
 
 typedef struct s_color {
 	int			r;
@@ -63,7 +63,7 @@ typedef struct s_pos
 }				t_pos;
 
 typedef struct s_ray {
-	t_pos		pos;
+//	t_pos		pos;
 	t_dir		dir;
 	double		distx;
 	double		disty;
@@ -84,7 +84,7 @@ typedef struct s_camera {
 
 typedef struct s_player {
 	t_pos		pos;
-	double		dir;
+	t_dir		dir;
 }				t_player;
 
 typedef struct s_matrix {
@@ -115,6 +115,7 @@ typedef struct s_cube
 	t_player	player;
 	t_camera	cam;
 	t_ray		ray;
+	t_dir		plane;
 }	t_cube;
 
 //				MAP				//

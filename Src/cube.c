@@ -34,6 +34,10 @@ int	main(int ac, char **av)
 
 	(void)ac;
 	cb = malloc(sizeof(t_cube));
+	(cb)->ray.dir.x = -1;
+		(cb)->ray.dir.y = 0;
+	cb->plane.x = 0;
+	cb->plane.y = FOV;
 	cb->img = malloc(sizeof(t_img));
 	if (!cb->img || game_init(&cb))
 		return (EXIT_FAILURE);
