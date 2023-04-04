@@ -6,7 +6,7 @@
 /*   By: mbozzi <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/31 18:16:05 by mbozzi            #+#    #+#             */
-/*   Updated: 2023/04/04 16:19:44 by mbozzi           ###   ########.fr       */
+/*   Updated: 2023/04/04 16:52:37 by mbozzi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,17 +52,17 @@ typedef struct s_color {
 
 typedef struct s_dir
 {
-	double 		x;
+	double		x;
 	double		y;
 }				t_dir;
 
 typedef struct s_pos
 {
-	double 		x;
+	double		x;
 	double		y;
 }				t_pos;
 
-typedef struct  s_ray {
+typedef struct s_ray {
 	t_pos		pos;
 	t_dir		dir;
 	double		distx;
@@ -82,7 +82,7 @@ typedef struct s_camera {
 	double		y;
 }				t_camera;
 
-typedef struct	s_player {
+typedef struct s_player {
 	t_pos		pos;
 	double		dir;
 }				t_player;
@@ -113,7 +113,7 @@ typedef struct s_cube
 	t_matrix	map;
 	char		*path;
 	t_player	player;
-	t_camera 	cam;
+	t_camera	cam;
 	t_ray		ray;
 }	t_cube;
 
@@ -125,7 +125,7 @@ int		check_map(t_cube **cb, char *path);
 //				GAME			//
 
 int		ft_key_hook(int keycode, t_cube **cb);
-int		raycasting(t_cube **cb);
+void	raycasting(t_cube **cb);
 void	put_floor_sky(t_cube **cb);
 void	ft_draw_pixels(int x, int y, int color, t_cube *cb);
 
