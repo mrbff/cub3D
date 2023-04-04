@@ -6,7 +6,7 @@
 /*   By: mbozzi <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/31 18:53:31 by mbozzi            #+#    #+#             */
-/*   Updated: 2023/04/04 17:06:30 by mbozzi           ###   ########.fr       */
+/*   Updated: 2023/04/04 18:37:51 by mbozzi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,18 +16,15 @@ int	game_init(t_cube **cb)
 {
 	(*cb)->mlx = mlx_init();
 	(*cb)->mlx_win = mlx_new_window((*cb)->mlx, WIN_WID, WIN_HGT, "cube3D");
+	(*cb)->img->mlx_img = mlx_new_image((*cb)->mlx, WIN_WID, WIN_HGT);
 	if (!(*cb)->img->mlx_img)
-	{
-		(*cb)->img->mlx_img = mlx_new_image((*cb)->mlx, WIN_WID, WIN_HGT);
-		if (!(*cb)->img->mlx_img)
-			return (1);
-		(*cb)->img->data = mlx_get_data_addr((*cb)->img->mlx_img,
-				&(*cb)->img->bits_per_pixel,
-				&(*cb)->img->line_length,
-				&(*cb)->img->endian);
-		if (!(*cb)->img->data)
-			return (1);
-	}
+		return (1);
+	(*cb)->img->data = mlx_get_data_addr((*cb)->img->mlx_img,
+			&(*cb)->img->bits_per_pixel,
+			&(*cb)->img->line_length,
+			&(*cb)->img->endian);
+	if (!(*cb)->img->data)
+		return (1);
 	return (0);
 }
 

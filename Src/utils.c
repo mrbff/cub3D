@@ -6,7 +6,7 @@
 /*   By: mbozzi <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/01 16:02:18 by mbozzi            #+#    #+#             */
-/*   Updated: 2023/04/04 16:55:53 by mbozzi           ###   ########.fr       */
+/*   Updated: 2023/04/04 18:36:27 by mbozzi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,12 @@ void	ft_draw_pixels(int x, int y, int color, t_cube *cb)
 
 int	ft_destroy(t_cube *ptr)
 {
+	int	i;
+
+	i = -1;
+	while (ptr->map.mat[++i])
+		free(ptr->map.mat[i]);
+	free(ptr->map.mat);
 	mlx_destroy_image(ptr->mlx, ptr->img->mlx_img);
 	mlx_destroy_window(ptr->mlx, ptr->mlx_win);
 	mlx_destroy_display(ptr->mlx);

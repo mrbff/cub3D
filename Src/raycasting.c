@@ -6,7 +6,7 @@
 /*   By: mbozzi <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/03 11:33:45 by mbozzi            #+#    #+#             */
-/*   Updated: 2023/04/04 16:56:12 by mbozzi           ###   ########.fr       */
+/*   Updated: 2023/04/04 18:34:07 by mbozzi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,23 +32,31 @@ void	put_floor_sky(t_cube **cb)
 	}
 }
 
-void	drawcol(t_cube **cb, int col)
+void	drawline(t_cube **cb, int col)
 {
-	int	start;
-	int	end;
-	int	height;
+	int	col_hgt;
+	int	cropup;
+	int	cropdown;
+	int	index;
+	int	i;
 
-	height = (int)(WIN_HGT / (*cb)->ray.wall_dist);
-	start = -height / 2 + WIN_HGT / 2;
-	if (start < 0)
-		start = 0;
-	end = height / 2 + WIN_HGT / 2;
-	if (end >= WIN_HGT)
-		end = WIN_HGT - 1;
-	while (start <= end)
+	cropup = 0;
+	cropdown = 0;
+	col_hgt = abs((int)(WIN_HGT / (*cb)->ray.wall_dist));
+	if (col_hgt > WIN_HGT)
 	{
-		ft_draw_pixels(col, start, 0xFFFF0000, *cb);
-		start++;
+		index = col;
+		cropup = (col_hgt - WIN_HGT) / 2;
+		cropdown = cropup + 1;
+	}
+	else
+		index = ((WIN_HGT - col_hgt) / 2) * WIN_WID;
+	i = cropup;
+	while (i < (col_hgt - cropdown))
+	{
+		ft_draw_pixels(col, (index / WIN_WID), 0xFFFF0000, *cb);
+		index += WIN_WID;
+		i++;
 	}
 }
 
@@ -122,7 +130,7 @@ void	raycasting(t_cube **cb)
 		y = (int)(*cb)->player.pos.y;
 		ray_dir(cb, x, y);
 		ray_dist(cb, x, y);
-		drawcol(cb, col);
+		drawline(cb, col);
 	}
 	mlx_put_image_to_window((*cb)->mlx, (*cb)->mlx_win,
 		(*cb)->img->mlx_img, 0, 0);
