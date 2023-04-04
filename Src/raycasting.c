@@ -6,7 +6,7 @@
 /*   By: mbozzi <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/03 11:33:45 by mbozzi            #+#    #+#             */
-/*   Updated: 2023/04/03 17:32:34 by mbozzi           ###   ########.fr       */
+/*   Updated: 2023/04/04 16:29:17 by mbozzi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,51 +20,38 @@ void	put_floor_sky(t_cube **cb)
 	{
 		col = -1;
 		while (++col < WIN_WID)
-			mlx_pixel_put((*cb)->mlx, (*cb)->mlx_win, col, i, 0x0000FFFF);
+			ft_draw_pixels(col, i , 0x0000FFFF, *cb);
 	}
 	while (++i < WIN_HGT)
 	{
 		col = -1;
 		while (++col < (WIN_WID))
-			mlx_pixel_put((*cb)->mlx, (*cb)->mlx_win, col, i, 0x00606060);
+			ft_draw_pixels(col, i , 0x00606060, *cb);
 	}
 }
 
 void	drawcol(t_cube **cb, int col)
 {
-	int col_h;
-	int cropup;
-	int cropdown;
-	int index;
-	int i;
-
-	col_h = abs(WIN_HGT / (int)(*cb)->ray.wall_dist);
-	cropup = 0;
-	cropdown = 0;
-	index = 0;
-
-	if (col_h > WIN_HGT)
+	int start;
+	int end;
+	int height;
+	
+	height = (int)(WIN_HGT / (*cb)->ray.wall_dist);
+	start = -height / 2 + WIN_HGT / 2;
+	if (start < 0)
+		start = 0;
+	end = height / 2 + WIN_HGT / 2;
+	if (end >= WIN_HGT)
+		end = WIN_HGT - 1;
+	while (start <= end)
 	{
-		index = col;
-		cropup = (col_h - WIN_HGT) / 2;
-		cropdown = cropup + 1;
-	}
-	else
-	{
-		index = col + ((WIN_HGT - col_h) / 2) * WIN_WID;
-		cropup = 0;
-		cropdown = 0;
-	}
-	i = cropup;
-	while (i < (col_h -cropdown))
-	{
-		mlx_pixel_put((*cb)->mlx, (*cb)->mlx_win, i, index, 0xFFFF0000);
-		//index += WIN_WID;
-		i++;
+		ft_draw_pixels(col, start, 0xFFFF0000, *cb);
+		//mlx_pixel_put((*cb)->mlx, (*cb)->mlx_win, col, start, );
+		start++;
 	}
 }
 
-void	raycasting(t_cube **cb)
+int	raycasting(t_cube **cb)
 {
 	int	col;
 	
@@ -73,51 +60,55 @@ void	raycasting(t_cube **cb)
 	while (++col < WIN_WID)
 	{
 		(*cb)->cam.x = 2 * col / (double)WIN_WID - 1;
-		(*cb)->ray.pos.x = (*cb)->player.pos.x;
-		(*cb)->ray.pos.y = (*cb)->player.pos.y;
-		(*cb)->ray.dir.x = -1 + (0 * (*cb)->cam.x);
-		(*cb)->ray.dir.y = 0 + (FOV * (*cb)->cam.x);
+		(*cb)->ray.pos.x = -0.5;
+		(*cb)->ray.pos.y = 0;
+		(*cb)->ray.dir.x = (*cb)->ray.pos.x + 0 * (*cb)->cam.x;
+		(*cb)->ray.dir.y = (*cb)->ray.pos.y + FOV * (*cb)->cam.x;
 		(*cb)->ray.deltax = fabs(1 / (*cb)->ray.dir.x);
 		(*cb)->ray.deltay = fabs(1 / (*cb)->ray.dir.y);
+		int mapx = (int)(*cb)->player.pos.x;
+		int mapy = (int)(*cb)->player.pos.y;
 		if ((*cb)->ray.dir.x < 0)
 		{
 			(*cb)->ray.stepx = -1;
-			(*cb)->ray.distx = ((*cb)->ray.pos.x - (int)(*cb)->player.pos.x) * (*cb)->ray.deltax;
+			(*cb)->ray.distx = ((*cb)->player.pos.x - mapx) * (*cb)->ray.deltax;
 		}
 		else
 		{
 			(*cb)->ray.stepx = 1;
-			(*cb)->ray.distx = ((int)(*cb)->player.pos.x + 1 - (*cb)->ray.pos.x) * (*cb)->ray.deltax;
+			(*cb)->ray.distx = (mapx - (*cb)->player.pos.x + 1) * (*cb)->ray.deltax;
 		}
 		if ((*cb)->ray.dir.y < 0)
 		{
 			(*cb)->ray.stepy = -1;
-			(*cb)->ray.disty = ((*cb)->ray.pos.y - (int)(*cb)->player.pos.y) * (*cb)->ray.deltay;
+			(*cb)->ray.disty = ((*cb)->player.pos.y - mapy) * (*cb)->ray.deltay;
 		}
 		else
 		{
 			(*cb)->ray.stepy = 1;
-			(*cb)->ray.disty = ((int)(*cb)->player.pos.y + 1 - (*cb)->ray.pos.y) * (*cb)->ray.deltay;
+			(*cb)->ray.disty = (mapy - (*cb)->player.pos.y + 1) * (*cb)->ray.deltay;
 		}
-		while ((*cb)->map.mat[(int)(*cb)->player.pos.x][(int)((*cb)->player.pos.y) * ft_strlen((*cb)->map.mat[0]) ] == 0)
+		while ((*cb)->map.mat[mapx][mapy] == '0' || (*cb)->map.mat[mapx][mapy] == 'N')
 		{
 			if ((*cb)->ray.distx < (*cb)->ray.disty)
 			{
 				(*cb)->ray.distx += (*cb)->ray.deltax;
-				(*cb)->player.pos.x += (*cb)->ray.stepx;
+				mapx += (*cb)->ray.stepx;
 				(*cb)->ray.side = 0;
 			}
 			else
 			{
 				(*cb)->ray.disty += (*cb)->ray.deltay;
-				(*cb)->player.pos.y += (*cb)->ray.stepy;
+				mapy += (*cb)->ray.stepy;
 				(*cb)->ray.side = 1;
 			}
 		}
 		if ((*cb)->ray.side == 0)
-			(*cb)->ray.wall_dist = fabs(((*cb)->player.pos.x - (*cb)->ray.pos.x + (1 - (*cb)->ray.stepx) / 2) / (*cb)->ray.dir.x);
+			(*cb)->ray.wall_dist = (mapx - (*cb)->player.pos.x + (1 - (*cb)->ray.stepx) / 2) / (*cb)->ray.dir.x;
 		else
-			(*cb)->ray.wall_dist = fabs(((*cb)->player.pos.y - (*cb)->ray.pos.y + (1 - (*cb)->ray.stepy) / 2) / (*cb)->ray.dir.y);
+			(*cb)->ray.wall_dist = (mapy -(*cb)->player.pos.y + (1 - (*cb)->ray.stepy) / 2) / (*cb)->ray.dir.y;
 		drawcol(cb, col);
 	}
+	mlx_put_image_to_window((*cb)->mlx, (*cb)->mlx_win, (*cb)->img->mlx_img, 0, 0);
+	return (0);
 }
