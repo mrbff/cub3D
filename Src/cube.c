@@ -6,25 +6,27 @@
 /*   By: mbozzi <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/31 18:53:31 by mbozzi            #+#    #+#             */
-/*   Updated: 2023/04/04 18:37:51 by mbozzi           ###   ########.fr       */
+/*   Updated: 2023/04/05 14:28:34 by mbozzi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../cube3D.h"
 
-int	game_init(t_cube **cb)
+int	game_init(t_cube *cb)
 {
-	(*cb)->mlx = mlx_init();
-	(*cb)->mlx_win = mlx_new_window((*cb)->mlx, WIN_WID, WIN_HGT, "cube3D");
-	(*cb)->img->mlx_img = mlx_new_image((*cb)->mlx, WIN_WID, WIN_HGT);
-	if (!(*cb)->img->mlx_img)
+	cb->mlx = mlx_init();
+	cb->mlx_win = mlx_new_window(cb->mlx, WIN_WID, WIN_HGT, "cube3D");
+	cb->img->mlx_img = mlx_new_image(cb->mlx, WIN_WID, WIN_HGT);
+	if (!cb->img->mlx_img)
 		return (1);
-	(*cb)->img->data = mlx_get_data_addr((*cb)->img->mlx_img,
-			&(*cb)->img->bits_per_pixel,
-			&(*cb)->img->line_length,
-			&(*cb)->img->endian);
-	if (!(*cb)->img->data)
+	cb->img->data = mlx_get_data_addr(cb->img->mlx_img,
+			&cb->img->bits_per_pixel,
+			&cb->img->line_length,
+			&cb->img->endian);
+	if (!cb->img->data)
 		return (1);
+	cb->plane.x = 0;
+	cb->plane.y = FOV;
 	return (0);
 }
 
@@ -40,7 +42,8 @@ int	main(int ac, char **av)
 	cb->path = ft_strjoin("./Maps/", av[1]);
 	if (check_map(&cb, cb->path) == 1)
 		return (EXIT_FAILURE);
-	mlx_key_hook(cb->mlx_win, ft_key_hook, &cb);
+	raycasting(cb);
+	mlx_key_hook(cb->mlx_win, ft_key_hook, cb);
 	mlx_hook(cb->mlx_win, 17, 0, ft_destroy, cb);
 	mlx_loop(cb->mlx);
 }

@@ -6,7 +6,7 @@
 /*   By: mbozzi <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/01 16:09:39 by mbozzi            #+#    #+#             */
-/*   Updated: 2023/04/04 17:02:56 by mbozzi           ###   ########.fr       */
+/*   Updated: 2023/04/05 14:21:42 by mbozzi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,9 +47,8 @@ int	lines_controll(t_cube **cb, int x, int y, int len)
 			else if ((*cb)->map.mat[x][y] == 'N' || (*cb)->map.mat[x][y] == 'S'
 				|| (*cb)->map.mat[x][y] == 'E' || (*cb)->map.mat[x][y] == 'W')
 			{
-				(*cb)->player.pos.x = (double)x;
-				(*cb)->player.pos.y = (double)y;
-				(*cb)->player.dir = 0;
+				(*cb)->p_pos.x = (double)x;
+				(*cb)->p_pos.y = (double)y;
 			}
 			y++;
 		}

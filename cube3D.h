@@ -6,7 +6,7 @@
 /*   By: mbozzi <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/31 18:16:05 by mbozzi            #+#    #+#             */
-/*   Updated: 2023/04/05 13:07:47 by mbozzi           ###   ########.fr       */
+/*   Updated: 2023/04/05 14:27:32 by mbozzi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,40 +50,28 @@ typedef struct s_color {
 	int			b;
 }				t_color;
 
-typedef struct s_dir
+typedef struct s_vector
 {
 	double		x;
 	double		y;
-}				t_dir;
-
-typedef struct s_pos
-{
-	double		x;
-	double		y;
-}				t_pos;
+}				t_vector;
 
 typedef struct s_ray {
-	t_pos		pos;
-	t_dir		dir;
-	t_pos		dist;
-	t_dir		step;
-	double		deltax;
-	double		deltay;
+	t_vector	pos;
+	t_vector	dir;
+	t_vector	dist;
+	t_vector	step;
+	t_vector	delta;
 	double		wall_dist;
 	int			side;
 }				t_ray;
 
 typedef struct s_camera {
-	t_pos		pos;
-	t_dir		dir;
+	t_vector	pos;
+	t_vector	dir;
 	double		x;
 	double		y;
 }				t_camera;
-
-typedef struct s_player {
-	t_pos		pos;
-	double		dir;
-}				t_player;
 
 typedef struct s_matrix {
 	char		**mat;
@@ -110,9 +98,11 @@ typedef struct s_cube
 	void		*mlx;
 	t_matrix	map;
 	char		*path;
-	t_player	player;
+	t_vector	p_pos;
+	t_vector	p_dir;
 	t_camera	cam;
 	t_ray		ray;
+	t_vector	plane;
 }				t_cube;
 
 //				MAP				//
@@ -122,9 +112,9 @@ int				check_map(t_cube **cb, char *path);
 
 //				GAME			//
 
-int				ft_key_hook(int keycode, t_cube **cb);
-void			raycasting(t_cube **cb);
-void			put_floor_sky(t_cube **cb);
+int				ft_key_hook(int keycode, t_cube *cb);
+void			raycasting(t_cube *cb);
+void			put_floor_sky(t_cube *cb);
 void			ft_draw_pixels(int x, int y, int color, t_cube *cb);
 
 //				UTILS			//
