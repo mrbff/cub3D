@@ -6,7 +6,7 @@
 /*   By: mbozzi <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/01 16:02:18 by mbozzi            #+#    #+#             */
-/*   Updated: 2023/04/05 17:51:55 by mbozzi           ###   ########.fr       */
+/*   Updated: 2023/04/05 19:23:47 by mbozzi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,8 +32,8 @@ int		ft_get_pixels(int x, int y, t_img *img)
 	int color;
 
 	color = 0;
-	x = x * 255 / WIN_WID;
-	y = y * 255 / WIN_HGT;
+	//x = x * 255 / WIN_WID;
+	//y = y * 255 / WIN_HGT;
 	if (x >= 0 && x < WIN_WID && y >= 0 && y < WIN_HGT)
 	{
 		i = y * img->line_length + x * img->bits_per_pixel / 8;

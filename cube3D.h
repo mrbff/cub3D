@@ -6,7 +6,7 @@
 /*   By: mbozzi <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/31 18:16:05 by mbozzi            #+#    #+#             */
-/*   Updated: 2023/04/05 17:14:57 by mbozzi           ###   ########.fr       */
+/*   Updated: 2023/04/05 18:30:10 by mbozzi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,8 @@
 
 # define WIN_WID 1200
 # define WIN_HGT 720
+# define IMG_WID 256
+# define IMG_HGT 256
 # define FOV 0.66
 
 # define ESC 65307
@@ -64,14 +66,9 @@ typedef struct s_ray {
 	t_vector	delta;
 	double		wall_dist;
 	int			side;
+	int			offset;
+	double		wall;
 }				t_ray;
-
-typedef struct s_camera {
-	t_vector	pos;
-	t_vector	dir;
-	double		x;
-	double		y;
-}				t_camera;
 
 typedef struct s_matrix {
 	char		**mat;
@@ -100,7 +97,7 @@ typedef struct s_cube
 	char		*path;
 	t_vector	p_pos;
 	t_vector	p_dir;
-	t_camera	cam;
+	t_vector	cam;
 	t_ray		ray;
 	t_img		*tex1;
 }				t_cube;

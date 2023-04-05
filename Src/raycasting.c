@@ -6,7 +6,7 @@
 /*   By: mbozzi <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/03 11:33:45 by mbozzi            #+#    #+#             */
-/*   Updated: 2023/04/05 17:45:51 by mbozzi           ###   ########.fr       */
+/*   Updated: 2023/04/05 19:39:15 by mbozzi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,11 +52,13 @@ void	drawline(t_cube *cb, int col)
 	else
 		index = ((WIN_HGT - col_hgt) / 2) * WIN_WID;
 	i = cropup;
+	int j = (i / col_hgt);
 	while (i < (col_hgt - cropdown))
 	{
-		ft_draw_pixels(col, (index / WIN_WID), ft_get_pixels(col, (index / WIN_WID), cb->tex1), cb);
+		ft_draw_pixels(col, (index / WIN_WID), ft_get_pixels(cb->ray.offset , j % 256, cb->tex1), cb);
 		index += WIN_WID;
 		i++;
+		j++;
 	}
 }
 
@@ -83,6 +85,16 @@ void	ray_dist(t_cube *cb, int x, int y)
 	else
 		cb->ray.wall_dist = fabs((y - cb->p_pos.y \
 	+ (1 - cb->ray.step.y) / 2) / cb->ray.dir.y);
+	if (cb->ray.side == 1)
+		cb->ray.wall = cb->ray.pos.x + ((y - cb->p_pos.y + (1 - cb->ray.step.y) / 2) / cb->ray.dir.y) * cb->ray.dir.x;
+	else
+		cb->ray.wall = cb->ray.pos.y + ((x - cb->p_pos.x + (1 - cb->ray.step.x) / 2) / cb->ray.dir.x) * cb->ray.dir.y;
+	cb->ray.wall -= floor(cb->ray.wall);
+	cb->ray.offset = (int)(cb->ray.wall * IMG_WID);
+	if (cb->ray.side == 0 && cb->ray.dir.x > 0)
+		cb->ray.offset = IMG_WID - cb->ray.offset - 1;
+	if (cb->ray.side == 1 && cb->ray.dir.y < 0)
+		cb->ray.offset = IMG_WID - cb->ray.offset - 1;
 }
 
 void	ray_dir(t_cube *cb, int x, int y)
