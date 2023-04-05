@@ -49,6 +49,7 @@ int	lines_controll(t_cube **cb, int x, int y, int len)
 			{
 				(*cb)->pos.x = (double)x;
 				(*cb)->pos.y = (double)y;
+				(*cb)->map.mat[x][y] = '0';
 			}
 			y++;
 		}
@@ -80,7 +81,7 @@ int	check_map(t_cube **cb, char *path)
 		ft_printf("\033[0;31mError\nInvalid Map\n\033[0;37m");
 		return (1);
 	}
-	if (check_map_error(cb) == 1)
+/*	if (check_map_error(cb) == 1)
 	{
 		while ((*cb)->map.lines >= 0)
 		{
@@ -91,7 +92,7 @@ int	check_map(t_cube **cb, char *path)
 		free((*cb)->map.mat);
 		ft_printf("\033[0;31mError\nMap Error\n\033[0;37m");
 		return (1);
-	}
+	}*/
 	free(path);
 	return (0);
 }

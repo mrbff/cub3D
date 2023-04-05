@@ -15,20 +15,20 @@
 int	game_init(t_cube *cb)
 {
 	cb->mlx = mlx_init();
-//	if (!cb->mlx)
-//		return (1);
+	if (!cb->mlx)
+		printf("%d\n", 1);
 	cb->mlx_win = mlx_new_window(cb->mlx, WIN_WID, WIN_HGT, "cube3D");
-//	if (!cb->mlx_win)
-//		return (2);
+	if (!cb->mlx_win)
+		printf("%d\n", 2);
 	cb->img->mlx_img = mlx_new_image(cb->mlx, WIN_WID, WIN_HGT);
 	if (!cb->img->mlx_img)
-		return (3);
+		printf("%d\n", 3);
 	cb->img->data = mlx_get_data_addr(cb->img->mlx_img,
 			&cb->img->bits_per_pixel,
 			&cb->img->line_length,
 			&cb->img->endian);
 	if (!cb->img->data)
-		return (4);
+		printf("%d\n", 4);
 	return (0);
 }
 
@@ -37,9 +37,9 @@ int	ft_init(t_cube *cb)
 	cb->img = malloc(sizeof(t_img));
 //	if (!cb->img || game_init(cb))
 //		return (EXIT_FAILURE);
-	
-	cb->pos.x = 12;//da fare dinamici
-	cb->pos.y = 5;//
+	game_init(cb);
+	cb->pos.x = 3;//da fare dinamici
+	cb->pos.y = 2;//
 	cb->dir.x = -1;
 	cb->dir.y = 0;
 	cb->plane.x = 0;
@@ -52,14 +52,28 @@ int	main(int ac, char **av)
 	t_cube	*cb;
 	
 	cb = malloc(sizeof(t_cube));
-	(void)ac;
+	if (ac != 2)
+		return (1);
 	ft_init(cb);
 	cb->path = ft_strjoin("./Maps/", av[1]);
 	if (check_map(&cb, cb->path) == 1)
 		return (EXIT_FAILURE);
-	write(1,cb->path, 5);
-//	mlx_key_hook(cb->mlx_win, ft_key_hook, &cb);
-	mlx_hook(cb->mlx_win, 17, 0, ft_destroy, &cb);
+	int d = 0;
+	int f = 0;
+	while(cb->map.mat[d])
+	{
+		f = 0;
+		while(cb->map.mat[d][f])
+		{
+			write(1, &cb->map.mat[d][f], 1);
+			f++;
+		}
+		d++;
+		write(1, "\n", 1);
+	}
+//	write(1,cb->path, 5);
+	mlx_key_hook(cb->mlx_win, ft_key_hook, cb);
+	mlx_hook(cb->mlx_win, 17, 0, ft_destroy, cb);
 	mlx_loop(cb->mlx);
 }
 

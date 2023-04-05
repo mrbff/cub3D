@@ -94,7 +94,7 @@ int		check_map(t_cube **cb, char *path);
 
 //				GAME			//
 
-int		ft_key_hook(int keycode, t_cube *cb);
+int		ft_key_hook(int keycode, void *param);
 void	raycasting(t_cube *cb);
 void	put_floor_sky(t_cube *cb);
 void	ft_draw_pixels(int x, int y, int color, t_cube *cb);

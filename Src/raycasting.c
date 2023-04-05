@@ -32,21 +32,16 @@ void	put_floor_sky(t_cube *cb)
 	}
 }
 
-
-
-
-
 void	verLine(t_cube *cb, int x, int y1, int y2, int color)
 {
-int	y;
-y = y1;
-while (y <= y2)
-{
-//	mlx_pixel_put(cb->mlx, cb->mlx_win, x, y, color);
-	ft_draw_pixels(x, y, color, cb);
-	y++;
-}
-
+	int	y;
+	y = y1;
+	while (y <= y2)
+	{
+	//	mlx_pixel_put(cb->mlx, cb->mlx_win, x, y, color);
+		ft_draw_pixels(x, y, color, cb);
+		y++;
+	}
 }
 
 void	raycasting(t_cube *cb)
@@ -116,7 +111,8 @@ while (x < WIN_WID)
 			side = 1;
 		}
 		//Check if ray has hit a wall
-		if (cb->map.mat[mapX][mapY] > 0) hit = 1;
+		if (cb->map.mat[mapX][mapY] > '0' && cb->map.mat[mapX][mapY] != 'N')
+			hit = 1;
 	}
 	if (side == 0)
 		perpWallDist = (mapX - cb->pos.x + (1 - stepX) / 2) / rayDirX;
@@ -134,22 +130,23 @@ while (x < WIN_WID)
 	if(drawEnd >= WIN_HGT)
 		drawEnd = WIN_HGT - 1;
 
-	int	color;
-	if (cb->map.mat[mapY][mapX] == 1)
+	int	color = 0;
+	if (cb->map.mat[mapY][mapX] == '1')
 		color = 0xFF0000;
-	else if (cb->map.mat[mapY][mapX] == 2)
-		color = 0x00FF00;
-	else if (cb->map.mat[mapY][mapX] == 3)
-		color = 0x0000FF;
-	else if (cb->map.mat[mapY][mapX] == 4)
-		color = 0xFFFFFF;
-	else
-		color = 0xFFFF00;
-
-	if (side == 1)
-		color = color / 2;
-
 	verLine(cb, x, drawStart, drawEnd, color);
+/*	else if (cb->map.mat[mapY][mapX] == '2')
+		color = 0x00FF00;
+	else if (cb->map.mat[mapY][mapX] == '3')
+		color = 0x0000FF;
+	else if (cb->map.mat[mapY][mapX] == '4')
+		color = 0xFFFFFF;*/
+//	else
+//		color = 0xFFFF00;
+
+//	if (side == 1)
+//		color = color / 2;
+
+	
 
 	x++;
 }

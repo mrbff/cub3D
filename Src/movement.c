@@ -12,21 +12,22 @@
 
 #include "../cube3D.h"
 
-int	ft_key_hook(int keycode, t_cube *cb)
+int	ft_key_hook(int keycode, void *param)
 {
 	double	old;
-
+	t_cube *cb;
+	cb = (t_cube *)param;
 	old = cb->dir.x;
 	if (keycode == ESC)
 		ft_destroy(cb);
-	else if (keycode == ARROW_UP)
+	else if (keycode == 115)
 	{
 		if (!cb->map.mat[(int)(cb->pos.x + cb->dir.x * MOVSPEED)][(int)cb->pos.y])
 			cb->pos.x += cb->dir.x * MOVSPEED;
 		if (!cb->map.mat[(int)cb->pos.x][(int)(cb->pos.y + cb->dir.x * MOVSPEED)])
 			cb->pos.y += cb->dir.y * MOVSPEED;
 	}
-	else if (keycode == ARROW_DOWN)
+	else if (keycode == 119)
 	{
 		if (!cb->map.mat[(int)(cb->pos.x - cb->dir.x * MOVSPEED)][(int)cb->pos.y])
 			cb->pos.x -= cb->dir.x * MOVSPEED;
