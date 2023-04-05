@@ -6,7 +6,7 @@
 /*   By: mbozzi <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/31 18:53:31 by mbozzi            #+#    #+#             */
-/*   Updated: 2023/04/05 15:29:08 by mbozzi           ###   ########.fr       */
+/*   Updated: 2023/04/05 17:50:42 by mbozzi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,8 @@
 
 int	game_init(t_cube *cb)
 {
+	int x = 256;
+	int y = 256;
 	cb->mlx = mlx_init();
 	cb->mlx_win = mlx_new_window(cb->mlx, WIN_WID, WIN_HGT, "cube3D");
 	cb->img->mlx_img = mlx_new_image(cb->mlx, WIN_WID, WIN_HGT);
@@ -25,6 +27,12 @@ int	game_init(t_cube *cb)
 			&cb->img->endian);
 	if (!cb->img->data)
 		return (1);
+	cb->tex1 = malloc(sizeof(t_img));
+	cb->tex1->mlx_img = mlx_xpm_file_to_image(cb->mlx, "./Texture/stone.xpm", &x, &y);
+	cb->tex1->data = mlx_get_data_addr(cb->tex1->mlx_img,
+			&cb->tex1->bits_per_pixel,
+			&cb->tex1->line_length,
+			&cb->tex1->endian);
 	cb->cam.x = 0;
 	cb->cam.y = FOV;
 	cb->p_dir.x = -1;

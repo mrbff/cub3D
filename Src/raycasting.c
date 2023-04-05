@@ -6,7 +6,7 @@
 /*   By: mbozzi <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/03 11:33:45 by mbozzi            #+#    #+#             */
-/*   Updated: 2023/04/05 15:57:25 by mbozzi           ###   ########.fr       */
+/*   Updated: 2023/04/05 17:45:51 by mbozzi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,7 +54,7 @@ void	drawline(t_cube *cb, int col)
 	i = cropup;
 	while (i < (col_hgt - cropdown))
 	{
-		ft_draw_pixels(col, (index / WIN_WID), 0xFFFF0000, cb);
+		ft_draw_pixels(col, (index / WIN_WID), ft_get_pixels(col, (index / WIN_WID), cb->tex1), cb);
 		index += WIN_WID;
 		i++;
 	}

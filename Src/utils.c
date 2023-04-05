@@ -6,7 +6,7 @@
 /*   By: mbozzi <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/01 16:02:18 by mbozzi            #+#    #+#             */
-/*   Updated: 2023/04/05 15:25:56 by mbozzi           ###   ########.fr       */
+/*   Updated: 2023/04/05 17:51:55 by mbozzi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,24 @@ void	ft_draw_pixels(int x, int y, int color, t_cube *cb)
 	}
 }
 
+int		ft_get_pixels(int x, int y, t_img *img)
+{
+	int	i;
+	int	*ptr2;
+	int color;
+
+	color = 0;
+	x = x * 255 / WIN_WID;
+	y = y * 255 / WIN_HGT;
+	if (x >= 0 && x < WIN_WID && y >= 0 && y < WIN_HGT)
+	{
+		i = y * img->line_length + x * img->bits_per_pixel / 8;
+		ptr2 = (int *)&img->data[i];
+		color = *ptr2;
+	}
+	return (color);
+}
+
 int	ft_destroy(t_cube *ptr)
 {
 	int	i;
@@ -38,6 +56,7 @@ int	ft_destroy(t_cube *ptr)
 	mlx_destroy_display(ptr->mlx);
 	free(ptr->img);
 	free(ptr->mlx);
+	free(ptr->tex1);
 	free(ptr);
 	exit(0);
 	return (0);
