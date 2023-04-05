@@ -6,7 +6,7 @@
 /*   By: mbozzi <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/31 18:53:31 by mbozzi            #+#    #+#             */
-/*   Updated: 2023/04/05 14:39:57 by mbozzi           ###   ########.fr       */
+/*   Updated: 2023/04/05 15:05:26 by mbozzi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,8 +25,10 @@ int	game_init(t_cube *cb)
 			&cb->img->endian);
 	if (!cb->img->data)
 		return (1);
-	cb->plane.x = 0;
-	cb->plane.y = FOV;
+	cb->cam.x = 0;
+	cb->cam.y = FOV;
+	cb->p_dir.x = -1;
+	cb->p_dir.y = 0;
 	return (0);
 }
 

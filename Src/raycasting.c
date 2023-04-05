@@ -6,7 +6,7 @@
 /*   By: mbozzi <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/03 11:33:45 by mbozzi            #+#    #+#             */
-/*   Updated: 2023/04/05 14:26:00 by mbozzi           ###   ########.fr       */
+/*   Updated: 2023/04/05 15:24:02 by mbozzi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,30 +37,32 @@ void	drawline(t_cube *cb, int col)
 	int	col_hgt;
 	int	cropup;
 	int	cropdown;
-	int	index;
+	int	i;
 
-	cropup = 0;
-	cropdown = 0;
 	col_hgt = abs((int)(WIN_HGT / cb->ray.wall_dist));
 	if (col_hgt > WIN_HGT)
 	{
-		index = col;
+		i = col;
 		cropup = (col_hgt - WIN_HGT) / 2;
 		cropdown = cropup + 1;
 	}
 	else
-		index = (WIN_HGT - col_hgt) / 2;
+	{
+		i = (WIN_HGT - col_hgt) / 2;
+		cropup = 0;
+		cropdown = 0;
+	}
 	while (cropup < (col_hgt - cropdown))
 	{
-		ft_draw_pixels(col, index, 0xFFFF0000, cb);
+		ft_draw_pixels(col, i, 0xFFFF0000, cb);
 		cropup++;
-		index++;
+		i++;
 	}
 }
 
 void	ray_dist(t_cube *cb, int x, int y)
 {
-	while (cb->map.mat[x][y] == '0' || cb->map.mat[x][y] == 'N')
+	while (cb->map.mat[x][y] != '1')
 	{
 		if (cb->ray.dist.x < cb->ray.dist.y)
 		{
@@ -76,11 +78,11 @@ void	ray_dist(t_cube *cb, int x, int y)
 		}
 	}
 	if (cb->ray.side == 0)
-		cb->ray.wall_dist = (x - cb->p_pos.x
-				+ (1 - cb->ray.step.x) / 2) / cb->ray.dir.x;
+		cb->ray.wall_dist = fabs((x - cb->p_pos.x \
+	+ (1 - cb->ray.step.x) / 2) / cb->ray.dir.x);
 	else
-		cb->ray.wall_dist = (y - cb->p_pos.y
-				+ (1 - cb->ray.step.y) / 2) / cb->ray.dir.y;
+		cb->ray.wall_dist = fabs((y - cb->p_pos.y \
+	+ (1 - cb->ray.step.y) / 2) / cb->ray.dir.y);
 }
 
 void	ray_dir(t_cube *cb, int x, int y)
@@ -88,30 +90,31 @@ void	ray_dir(t_cube *cb, int x, int y)
 	if (cb->ray.dir.x < 0)
 	{
 		cb->ray.step.x = -1;
-		cb->ray.dist.x = (cb->p_pos.x - x) * cb->ray.delta.x;
+		cb->ray.dist.x = (cb->ray.pos.x - x) * cb->ray.delta.x;
 	}
 	else
 	{
 		cb->ray.step.x = 1;
-		cb->ray.dist.x = (x - cb->p_pos.x + 1) * cb->ray.delta.x;
+		cb->ray.dist.x = (x - cb->ray.pos.x + 1) * cb->ray.delta.x;
 	}
 	if (cb->ray.dir.y < 0)
 	{
 		cb->ray.step.y = -1;
-		cb->ray.dist.y = (cb->p_pos.y - y) * cb->ray.delta.y;
+		cb->ray.dist.y = (cb->ray.pos.y - y) * cb->ray.delta.y;
 	}
 	else
 	{
 		cb->ray.step.y = 1;
-		cb->ray.dist.y = (y - cb->p_pos.y + 1) * cb->ray.delta.y;
+		cb->ray.dist.y = (y - cb->ray.pos.y + 1) * cb->ray.delta.y;
 	}
 }
 
 void	raycasting(t_cube *cb)
 {
-	int	col;
-	int	x;
-	int	y;
+	double	camera;
+	int		col;
+	int		x;
+	int		y;
 
 	col = -1;
 	put_floor_sky(cb);
@@ -119,13 +122,13 @@ void	raycasting(t_cube *cb)
 	{
 		x = (int)cb->p_pos.x;
 		y = (int)cb->p_pos.y;
-		cb->cam.x = 2 * col / (double)WIN_WID - 1;
-		cb->ray.pos.x = -1;
-		cb->ray.pos.y = 0;
-		cb->ray.dir.x = cb->ray.pos.x + cb->plane.x * cb->cam.x;
-		cb->ray.dir.y = cb->ray.pos.y + cb->plane.y * cb->cam.x;
-		cb->ray.delta.x = fabs(1 / cb->ray.dir.x);
-		cb->ray.delta.y = fabs(1 / cb->ray.dir.y);
+		camera = 2 * col / (double)WIN_WID - 1;
+		cb->ray.pos.x = cb->p_pos.x;
+		cb->ray.pos.y = cb->p_pos.y;
+		cb->ray.dir.x = cb->p_dir.x + cb->cam.x * camera;
+		cb->ray.dir.y = cb->p_dir.y + cb->cam.y * camera;
+		cb->ray.delta.x = delta(cb, 'x');
+		cb->ray.delta.y = delta(cb, 'y');
 		ray_dir(cb, x, y);
 		ray_dist(cb, x, y);
 		drawline(cb, col);

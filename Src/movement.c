@@ -6,7 +6,7 @@
 /*   By: mbozzi <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/01 15:59:46 by mbozzi            #+#    #+#             */
-/*   Updated: 2023/04/05 14:29:10 by mbozzi           ###   ########.fr       */
+/*   Updated: 2023/04/05 14:53:14 by mbozzi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,9 +14,9 @@
 
 int	ft_key_hook(int keycode, t_cube *cb)
 {
-	if (keycode == ARROW_UP && cb->map.mat[(int)cb->p_pos.x - 1][(int)cb->p_pos.y] != '1')
+	if (keycode == ARROW_UP && cb->map.mat[(int)(cb->p_pos.x)][(int)cb->p_pos.y] != '1')
 		cb->p_pos.x += cb->ray.dir.x * MOVSPEED;
-	else if (keycode == ARROW_DOWN && cb->map.mat[(int)cb->p_pos.x + 1][(int)cb->p_pos.y] != '1')
+	else if (keycode == ARROW_DOWN && cb->map.mat[(int)(cb->p_pos.x)][(int)cb->p_pos.y] != '1')
 		cb->p_pos.x -= cb->ray.dir.x * MOVSPEED;
 	else
 		return 0;

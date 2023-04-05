@@ -6,7 +6,7 @@
 /*   By: mbozzi <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/31 18:16:05 by mbozzi            #+#    #+#             */
-/*   Updated: 2023/04/05 14:27:32 by mbozzi           ###   ########.fr       */
+/*   Updated: 2023/04/05 15:20:54 by mbozzi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -102,7 +102,6 @@ typedef struct s_cube
 	t_vector	p_dir;
 	t_camera	cam;
 	t_ray		ray;
-	t_vector	plane;
 }				t_cube;
 
 //				MAP				//
@@ -121,5 +120,6 @@ void			ft_draw_pixels(int x, int y, int color, t_cube *cb);
 
 int				ft_destroy(t_cube *ptr);
 unsigned int	ft_color_converter(int r, int g, int b);
+double			delta(t_cube *cb, char flag);
 
 #endif
