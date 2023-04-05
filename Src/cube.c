@@ -6,7 +6,7 @@
 /*   By: mbozzi <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/31 18:53:31 by mbozzi            #+#    #+#             */
-/*   Updated: 2023/04/05 14:28:34 by mbozzi           ###   ########.fr       */
+/*   Updated: 2023/04/05 14:39:57 by mbozzi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,7 @@ int	main(int ac, char **av)
 	(void)ac;
 	cb = malloc(sizeof(t_cube));
 	cb->img = malloc(sizeof(t_img));
-	if (!cb->img || game_init(&cb))
+	if (!cb->img || game_init(cb))
 		return (EXIT_FAILURE);
 	cb->path = ft_strjoin("./Maps/", av[1]);
 	if (check_map(&cb, cb->path) == 1)
