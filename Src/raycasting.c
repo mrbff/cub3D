@@ -6,7 +6,7 @@
 /*   By: mbozzi <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/03 11:33:45 by mbozzi            #+#    #+#             */
-/*   Updated: 2023/04/05 15:24:02 by mbozzi           ###   ########.fr       */
+/*   Updated: 2023/04/05 15:57:25 by mbozzi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ void	put_floor_sky(t_cube *cb)
 	int	col;
 
 	i = -1;
-	while (++i < WIN_HGT / 2)
+ 	while (++i < WIN_HGT / 2)
 	{
 		col = -1;
 		while (++col < WIN_WID)
@@ -37,25 +37,25 @@ void	drawline(t_cube *cb, int col)
 	int	col_hgt;
 	int	cropup;
 	int	cropdown;
+	int	index;
 	int	i;
 
+	cropup = 0;
+	cropdown = 0;
 	col_hgt = abs((int)(WIN_HGT / cb->ray.wall_dist));
 	if (col_hgt > WIN_HGT)
 	{
-		i = col;
+		index = col;
 		cropup = (col_hgt - WIN_HGT) / 2;
 		cropdown = cropup + 1;
 	}
 	else
+		index = ((WIN_HGT - col_hgt) / 2) * WIN_WID;
+	i = cropup;
+	while (i < (col_hgt - cropdown))
 	{
-		i = (WIN_HGT - col_hgt) / 2;
-		cropup = 0;
-		cropdown = 0;
-	}
-	while (cropup < (col_hgt - cropdown))
-	{
-		ft_draw_pixels(col, i, 0xFFFF0000, cb);
-		cropup++;
+		ft_draw_pixels(col, (index / WIN_WID), 0xFFFF0000, cb);
+		index += WIN_WID;
 		i++;
 	}
 }

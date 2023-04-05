@@ -6,7 +6,7 @@
 /*   By: mbozzi <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/01 16:09:39 by mbozzi            #+#    #+#             */
-/*   Updated: 2023/04/05 14:21:42 by mbozzi           ###   ########.fr       */
+/*   Updated: 2023/04/05 15:46:29 by mbozzi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,6 +49,7 @@ int	lines_controll(t_cube **cb, int x, int y, int len)
 			{
 				(*cb)->p_pos.x = (double)x;
 				(*cb)->p_pos.y = (double)y;
+				(*cb)->map.mat[x][y] = '0';
 			}
 			y++;
 		}

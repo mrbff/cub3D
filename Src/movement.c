@@ -6,27 +6,51 @@
 /*   By: mbozzi <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/01 15:59:46 by mbozzi            #+#    #+#             */
-/*   Updated: 2023/04/05 14:53:14 by mbozzi           ###   ########.fr       */
+/*   Updated: 2023/04/05 15:45:41 by mbozzi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../cube3D.h"
 
+#include "../cube3D.h"
+
 int	ft_key_hook(int keycode, t_cube *cb)
 {
-	if (keycode == ARROW_UP && cb->map.mat[(int)(cb->p_pos.x)][(int)cb->p_pos.y] != '1')
-		cb->p_pos.x += cb->ray.dir.x * MOVSPEED;
-	else if (keycode == ARROW_DOWN && cb->map.mat[(int)(cb->p_pos.x)][(int)cb->p_pos.y] != '1')
-		cb->p_pos.x -= cb->ray.dir.x * MOVSPEED;
-	else
-		return 0;
-	/*else if (keycode == ARROW_LEFT)
-		ptr->x_min = ptr->x_min - ptr->display_shift;
-	else if (keycode == ARROW_RIGHT)
-		ptr->x_min = ptr->x_min + ptr->display_shift;
-	else if (keycode == KEY_I)
-		ptr->incr_iter = !ptr->incr_iter;
-//	ft_put_image_to_window(ptr);*/
+	double	old;
+
+	old = cb->p_dir.x;
+	if (keycode == ESC)
+		ft_destroy(cb);
+	else if (keycode == ARROW_UP)
+	{
+		if (cb->map.mat[(int)(cb->p_pos.x + cb->p_dir.x * MOVSPEED)][(int)cb->p_pos.y] == 48)
+			cb->p_pos.x += cb->p_dir.x * MOVSPEED;
+		if (cb->map.mat[(int)cb->p_pos.x][(int)(cb->p_pos.y + cb->p_dir.x * MOVSPEED)] == 48)
+			cb->p_pos.y += cb->p_dir.y * MOVSPEED;
+	}
+	else if (keycode == ARROW_DOWN)
+	{
+		if (cb->map.mat[(int)(cb->p_pos.x - cb->p_dir.x * MOVSPEED)][(int)cb->p_pos.y] == 48)
+			cb->p_pos.x -= cb->p_dir.x * MOVSPEED;
+		if (cb->map.mat[(int)cb->p_pos.x][(int)(cb->p_pos.y - cb->p_dir.x * MOVSPEED)] == 48)
+			cb->p_pos.y -= cb->p_dir.y * MOVSPEED;
+	}
+	else if (keycode == 97)
+	{
+		cb->p_dir.x = cb->p_dir.x * cos(ROTSPEED) - cb->p_dir.y * sin(ROTSPEED);
+		cb->p_dir.y = old * sin(ROTSPEED) + cb->p_dir.y * cos(ROTSPEED);
+		old = cb->cam.x;
+		cb->cam.x = cb->cam.x * cos(ROTSPEED) - cb->cam.y * sin(ROTSPEED);
+		cb->cam.y = old * sin(ROTSPEED) + cb->cam.y * cos(ROTSPEED);
+	}
+	else if (keycode == 100)
+	{
+		cb->p_dir.x = cb->p_dir.x * cos(-ROTSPEED) - cb->p_dir.y * sin(-ROTSPEED);
+		cb->p_dir.y = old * sin(-ROTSPEED) + cb->p_dir.y * cos(-ROTSPEED);
+		old = cb->cam.x;
+		cb->cam.x = cb->cam.x * cos(-ROTSPEED) - cb->cam.y * sin(-ROTSPEED);
+		cb->cam.y = old * sin(-ROTSPEED) + cb->cam.y * cos(-ROTSPEED);
+	}
 	raycasting(cb);
 	ft_printf("keycode = %d\n", keycode);
 	return (0);
