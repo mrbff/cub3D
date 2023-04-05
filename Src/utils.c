@@ -6,7 +6,7 @@
 /*   By: mbozzi <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/01 16:02:18 by mbozzi            #+#    #+#             */
-/*   Updated: 2023/04/04 18:36:27 by mbozzi           ###   ########.fr       */
+/*   Updated: 2023/04/04 18:48:44 by mbozzi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,4 +41,9 @@ int	ft_destroy(t_cube *ptr)
 	free(ptr);
 	exit(0);
 	return (0);
+}
+
+unsigned int	ft_color_converter(int r, int g, int b)
+{
+	return (r << 16 | g << 8 | b);
 }

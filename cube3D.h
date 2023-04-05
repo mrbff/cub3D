@@ -6,7 +6,7 @@
 /*   By: mbozzi <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/31 18:16:05 by mbozzi            #+#    #+#             */
-/*   Updated: 2023/04/04 16:52:37 by mbozzi           ###   ########.fr       */
+/*   Updated: 2023/04/05 13:07:47 by mbozzi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,12 +65,10 @@ typedef struct s_pos
 typedef struct s_ray {
 	t_pos		pos;
 	t_dir		dir;
-	double		distx;
-	double		disty;
+	t_pos		dist;
+	t_dir		step;
 	double		deltax;
 	double		deltay;
-	int			stepx;
-	int			stepy;
 	double		wall_dist;
 	int			side;
 }				t_ray;
@@ -103,7 +101,7 @@ typedef struct s_img
 	int		bits_per_pixel;
 	int		line_length;
 	int		endian;
-}	t_img;
+}				t_img;
 
 typedef struct s_cube
 {
@@ -115,22 +113,23 @@ typedef struct s_cube
 	t_player	player;
 	t_camera	cam;
 	t_ray		ray;
-}	t_cube;
+}				t_cube;
 
 //				MAP				//
 
-int		ft_matrix(t_cube **cb, char *path);
-int		check_map(t_cube **cb, char *path);
+int				ft_matrix(t_cube **cb, char *path);
+int				check_map(t_cube **cb, char *path);
 
 //				GAME			//
 
-int		ft_key_hook(int keycode, t_cube **cb);
-void	raycasting(t_cube **cb);
-void	put_floor_sky(t_cube **cb);
-void	ft_draw_pixels(int x, int y, int color, t_cube *cb);
+int				ft_key_hook(int keycode, t_cube **cb);
+void			raycasting(t_cube **cb);
+void			put_floor_sky(t_cube **cb);
+void			ft_draw_pixels(int x, int y, int color, t_cube *cb);
 
 //				UTILS			//
 
-int		ft_destroy(t_cube *ptr);
+int				ft_destroy(t_cube *ptr);
+unsigned int	ft_color_converter(int r, int g, int b);
 
 #endif
