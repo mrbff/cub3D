@@ -12,27 +12,15 @@
 
 #include "../cube3D.h"
 
-void	put_floor_sky(t_cube *cb)
+static int	y_tex(int i, int col_hgt)
 {
-	int	i;
-	int	col;
+	int	r;
 
-	i = -1;
-	while (++i < WIN_HGT / 2)
-	{
-		col = -1;
-		while (++col < WIN_WID)
-			ft_draw_pixels(col, i, cb->ceil, cb);
-	}
-	while (++i < WIN_HGT)
-	{
-		col = -1;
-		while (++col < (WIN_WID))
-			ft_draw_pixels(col, i, cb->floor, cb);
-	}
+	r = ((int)(((double)i / (double)col_hgt) * IMG_HGT));
+	return (r % IMG_HGT);
 }
 
-void	drawline(t_cube *cb, int col)
+static void	drawline(t_cube *cb, int col)
 {
 	int	col_hgt;
 	int	cropup;
@@ -56,13 +44,12 @@ void	drawline(t_cube *cb, int col)
 	i = cropup - 1;
 	while (++i < (col_hgt - cropdown))
 	{
-	//	((int)(i / col_hgt * IMG_HGT)) % IMG_HGT
-		wall_selector(cb, col, index, ((int)(((double)i / (double)col_hgt) * IMG_HGT)) % IMG_HGT);
+		wall_selector(cb, col, index, y_tex(i, col_hgt));
 		index += WIN_WID;
 	}
 }
 
-void	ray_dist(t_cube *cb, int x, int y)
+static void	ray_dist(t_cube *cb, int x, int y)
 {
 	while (cb->map.mat[x][y] != '1')
 	{
@@ -88,7 +75,7 @@ void	ray_dist(t_cube *cb, int x, int y)
 	offset(cb, x, y);
 }
 
-void	ray_dir(t_cube *cb, int x, int y)
+static void	ray_dir(t_cube *cb, int x, int y)
 {
 	if (cb->ray.dir.x < 0)
 	{
