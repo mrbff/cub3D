@@ -31,10 +31,12 @@
 # define FOV 0.66
 
 # define ESC 65307
-# define ARROW_UP 119
-# define ARROW_DOWN 115
-# define ARROW_LEFT 97
-# define ARROW_RIGHT 100
+# define KEY_W 119
+# define KEY_S 115
+# define KEY_A 97
+# define KEY_D 100
+# define ARROW_LETF 65361
+# define ARROW_RIGHT 65363
 
 # define PI 3.14159
 # define MOVSPEED 0.1
