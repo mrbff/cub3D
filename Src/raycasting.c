@@ -6,7 +6,7 @@
 /*   By: mbozzi <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/03 11:33:45 by mbozzi            #+#    #+#             */
-/*   Updated: 2023/04/06 16:07:58 by mbozzi           ###   ########.fr       */
+/*   Updated: 2023/04/06 18:39:58 by mbozzi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,13 +22,13 @@ void	put_floor_sky(t_cube *cb)
 	{
 		col = -1;
 		while (++col < WIN_WID)
-			ft_draw_pixels(col, i, 0x0000FFFF, cb);
+			ft_draw_pixels(col, i, cb->ceil, cb);
 	}
 	while (++i < WIN_HGT)
 	{
 		col = -1;
 		while (++col < (WIN_WID))
-			ft_draw_pixels(col, i, 0x00606060, cb);
+			ft_draw_pixels(col, i, cb->floor, cb);
 	}
 }
 

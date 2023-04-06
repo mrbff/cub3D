@@ -6,7 +6,7 @@
 /*   By: mbozzi <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/01 16:02:18 by mbozzi            #+#    #+#             */
-/*   Updated: 2023/04/06 16:04:34 by mbozzi           ###   ########.fr       */
+/*   Updated: 2023/04/06 18:28:38 by mbozzi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,10 +50,6 @@ int	ft_destroy(t_cube *ptr)
 		free(ptr->map.mat[i]);
 	free(ptr->map.mat);
 	i = -1;
-	while (ptr->tex_path[++i])
-		free(ptr->tex_path[i]);
-	free(ptr->tex_path);
-	i = -1;
 	while (ptr->tex[++i])
 	{
 		mlx_destroy_image(ptr->mlx, ptr->tex[i]->mlx_img);
@@ -65,6 +61,7 @@ int	ft_destroy(t_cube *ptr)
 	mlx_destroy_display(ptr->mlx);
 	free(ptr->img);
 	free(ptr->mlx);
+	free(ptr->path);
 	free(ptr);
 	exit(0);
 	return (0);
