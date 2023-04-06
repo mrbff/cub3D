@@ -6,7 +6,7 @@
 /*   By: mbozzi <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/06 16:31:00 by mbozzi            #+#    #+#             */
-/*   Updated: 2023/04/06 19:34:34 by mbozzi           ###   ########.fr       */
+/*   Updated: 2023/04/06 19:50:44 by mbozzi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,17 +59,16 @@ int	get_color(char *line)
 	return (ret);
 }
 
-char	*get_path(char *line)
+void	get_path(t_cube *cb, char *line)
 {
 	if (!ft_strncmp(line, "NO ", 3))
-		return (ext_path(line, 0));
+		cb->tex_path[0] = ext_path(line, 0);
 	else if (!ft_strncmp(line, "SO ", 3))
-		return (ext_path(line, 0));
+		cb->tex_path[1] = ext_path(line, 0);
 	else if (!ft_strncmp(line, "WE ", 3))
-		return (ext_path(line, 0));
+		cb->tex_path[2] = ext_path(line, 0);
 	else if (!ft_strncmp(line, "EA ", 3))
-		return (ext_path(line, 0));
-	return (NULL);
+		cb->tex_path[3] = ext_path(line, 0);
 }
 
 void	texture_path(t_cube *cb)
@@ -89,7 +88,7 @@ void	texture_path(t_cube *cb)
 			cb->ceil = get_color(line);
 		else if (ft_strncmp(line, "\n", 2) && i < 4)
 		{
-			cb->tex_path[i] = get_path(line);
+			get_path(cb, line);
 			i++;
 		}
 		free(line);

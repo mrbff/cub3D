@@ -1,6 +1,6 @@
-NO     ./Texture/wall.xpm
-
 SO  ./Texture/stone.xpm
+
+NO     ./Texture/wall.xpm
 
 EA ./Texture/tex3.xpm
 
