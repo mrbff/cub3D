@@ -56,7 +56,8 @@ void	drawline(t_cube *cb, int col)
 	i = cropup - 1;
 	while (++i < (col_hgt - cropdown))
 	{
-		wall_selector(cb, col, index);
+	//	((int)(i / col_hgt * IMG_HGT)) % IMG_HGT
+		wall_selector(cb, col, index, ((int)(((double)i / (double)col_hgt) * IMG_HGT)) % IMG_HGT);
 		index += WIN_WID;
 	}
 }
