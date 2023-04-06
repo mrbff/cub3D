@@ -112,7 +112,7 @@ int				ft_key_hook(int keycode, t_cube *cb);
 void			raycasting(t_cube *cb);
 void			put_floor_sky(t_cube *cb);
 void			ft_draw_pixels(int x, int y, int color, t_cube *cb);
-void			wall_selector(t_cube *cb, int col, int index);
+void			wall_selector(t_cube *cb, int col, int index, int y);
 void			offset(t_cube *cb, int x, int y);
 void			texture_init(t_cube *cb);
 

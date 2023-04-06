@@ -12,16 +12,16 @@
 
 #include "../cube3D.h"
 
-void	wall_selector(t_cube *cb, int col, int index)
+void	wall_selector(t_cube *cb, int col, int index, int y)
 {
 	if (cb->ray.side == 0 && cb->ray.dir.x < 0)
-		ft_draw_pixels(col, (index / WIN_WID), ft_get_pixels(cb->ray.offset, ((index / WIN_WID) % IMG_WID), cb->tex[0]), cb);
+		ft_draw_pixels(col, (index / WIN_WID), ft_get_pixels(cb->ray.offset, y, cb->tex[0]), cb);
 	else if (cb->ray.side == 0 && cb->ray.dir.x > 0)
-		ft_draw_pixels(col, (index / WIN_WID), ft_get_pixels(cb->ray.offset, ((index / WIN_WID) % IMG_WID), cb->tex[1]), cb);
+		ft_draw_pixels(col, (index / WIN_WID), ft_get_pixels(cb->ray.offset, y, cb->tex[1]), cb);
 	else if (cb->ray.side == 1 && cb->ray.dir.y > 0)
-		ft_draw_pixels(col, (index / WIN_WID), ft_get_pixels(cb->ray.offset, ((index / WIN_WID) % IMG_WID), cb->tex[2]), cb);
+		ft_draw_pixels(col, (index / WIN_WID), ft_get_pixels(cb->ray.offset, y, cb->tex[2]), cb);
 	else if (cb->ray.side == 1 && cb->ray.dir.y < 0)
-		ft_draw_pixels(col, (index / WIN_WID), ft_get_pixels(cb->ray.offset, ((index / WIN_WID) % IMG_WID), cb->tex[3]), cb);
+		ft_draw_pixels(col, (index / WIN_WID), ft_get_pixels(cb->ray.offset, y, cb->tex[3]), cb);
 }
 
 void	offset(t_cube *cb, int x, int y)
