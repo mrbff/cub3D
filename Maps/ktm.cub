@@ -1,3 +1,15 @@
+NO ./Texture/wall.xpm
+
+SO ./Texture/stone.xpm
+
+WE ./Texture/tex2.xpm
+
+EA ./Texture/tex3.xpm
+
+F 220,100,0
+
+C 225,30,0
+
 111111111111111
 100000000000001
 100001000100001

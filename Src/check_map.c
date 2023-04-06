@@ -6,7 +6,7 @@
 /*   By: mbozzi <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/01 16:09:39 by mbozzi            #+#    #+#             */
-/*   Updated: 2023/04/05 15:46:29 by mbozzi           ###   ########.fr       */
+/*   Updated: 2023/04/06 17:05:02 by mbozzi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -93,6 +93,5 @@ int	check_map(t_cube **cb, char *path)
 		ft_printf("\033[0;31mError\nMap Error\n\033[0;37m");
 		return (1);
 	}
-	free(path);
 	return (0);
 }

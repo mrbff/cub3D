@@ -6,7 +6,7 @@
 /*   By: mbozzi <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/31 18:16:05 by mbozzi            #+#    #+#             */
-/*   Updated: 2023/04/06 16:07:30 by mbozzi           ###   ########.fr       */
+/*   Updated: 2023/04/06 18:35:25 by mbozzi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,12 +48,6 @@
 # define SUD  PI / 2 * 3
  */
 
-typedef struct s_color {
-	int			r;
-	int			g;
-	int			b;
-}				t_color;
-
 typedef struct s_vector
 {
 	double		x;
@@ -70,8 +64,6 @@ typedef struct s_ray {
 	int			side;
 	int			offset;
 	double		wall;
-	int			nswe1;
-	int			nswe2;
 }				t_ray;
 
 typedef struct s_matrix {
@@ -85,11 +77,11 @@ typedef struct s_matrix {
 
 typedef struct s_img
 {
-	void	*mlx_img;
-	char	*data;
-	int		bits_per_pixel;
-	int		line_length;
-	int		endian;
+	void		*mlx_img;
+	char		*data;
+	int			bits_per_pixel;
+	int			line_length;
+	int			endian;
 }				t_img;
 
 typedef struct s_cube
@@ -105,6 +97,8 @@ typedef struct s_cube
 	t_ray		ray;
 	t_img		**tex;
 	char		**tex_path;
+	int			floor;
+	int			ceil;
 }				t_cube;
 
 //				MAP				//
@@ -120,6 +114,7 @@ void			put_floor_sky(t_cube *cb);
 void			ft_draw_pixels(int x, int y, int color, t_cube *cb);
 void			wall_selector(t_cube *cb, int col, int index);
 void			offset(t_cube *cb, int x, int y);
+void			texture_init(t_cube *cb);
 
 //				UTILS			//
 
