@@ -27,17 +27,20 @@ $(OBJ_DIR)%.o: $(SRC_DIR)%.c
 	@$(CC) $(CFLAGS) -c $< -o $@
 
 $(NAME): $(OBJP)
+	@make -sC minilibx-linux
 	@gcc $(CFLAGS) $(OBJP) $(LIB) $(LINK) -o $(NAME)
-	@echo "Compiled ✅\033[0;37m"
+	@echo "\033[32mCompiled ✅\033[0;37m"
 
 clean:
 	@echo "\033[0;31mCleaning objects 🧹"
 	@rm -rf $(OBJ_DIR)
+	@rm -rf minilibx-linux/*.o
 	@make clean -s -C Src/MyLib
 
 fclean: clean
 	@echo "\033[0;31mRemoving $(NAME) 🗑\033[0;37m"
 	@rm -rf $(NAME)
+	@rm -rf minilibx-linux/*.a
 	@make fclean -s -C Src/MyLib
 
 re: fclean all
