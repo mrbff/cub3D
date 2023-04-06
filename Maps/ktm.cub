@@ -1,14 +1,20 @@
-NO ./Texture/wall.xpm
+NO     ./Texture/wall.xpm
 
-SO ./Texture/stone.xpm
-
-WE ./Texture/tex2.xpm
+SO  ./Texture/stone.xpm
 
 EA ./Texture/tex3.xpm
 
-F 220,100,0
+WE   ./Texture/tex2.xpm
 
-C 225,30,0
+
+
+
+F      220,100,0
+
+C  225,30,0
+
+
+
 
 111111111111111
 100000000000001

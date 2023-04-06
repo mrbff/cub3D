@@ -6,7 +6,7 @@
 /*   By: mbozzi <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/06 16:31:00 by mbozzi            #+#    #+#             */
-/*   Updated: 2023/04/06 19:26:36 by mbozzi           ###   ########.fr       */
+/*   Updated: 2023/04/06 19:34:34 by mbozzi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,6 @@ int	get_color(char *line)
 	int		i;
 
 	trim = ext_path(line, 1);
-	ft_printf("%s\n", trim);
 	color = ft_split(trim, ',');
 	ret = ft_color_converter(ft_atoi(color[0]),
 			ft_atoi(color[1]), ft_atoi(color[2]));
@@ -84,19 +83,18 @@ void	texture_path(t_cube *cb)
 	line = get_next_line(fd);
 	while (line != NULL)
 	{
-		if (ft_strncmp(line, "\n", 2) && i < 4)
-		{
-			cb->tex_path[i] = get_path(line);
-			i++;
-		}
 		if (!ft_strncmp(line, "F ", 2))
 			cb->floor = get_color(line);
 		else if (!ft_strncmp(line, "C ", 2))
 			cb->ceil = get_color(line);
+		else if (ft_strncmp(line, "\n", 2) && i < 4)
+		{
+			cb->tex_path[i] = get_path(line);
+			i++;
+		}
 		free(line);
 		line = get_next_line(fd);
 	}
-	printf ("%d %d\n", cb->floor, cb->ceil);
 	close(fd);
 }
 
