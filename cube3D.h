@@ -6,7 +6,7 @@
 /*   By: mbozzi <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/31 18:16:05 by mbozzi            #+#    #+#             */
-/*   Updated: 2023/04/05 18:30:10 by mbozzi           ###   ########.fr       */
+/*   Updated: 2023/04/06 16:07:30 by mbozzi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,6 +68,8 @@ typedef struct s_ray {
 	int			side;
 	int			offset;
 	double		wall;
+	int			nswe1;
+	int			nswe2;
 }				t_ray;
 
 typedef struct s_matrix {
@@ -99,7 +101,8 @@ typedef struct s_cube
 	t_vector	p_dir;
 	t_vector	cam;
 	t_ray		ray;
-	t_img		*tex1;
+	t_img		**tex;
+	char		**tex_path;
 }				t_cube;
 
 //				MAP				//
@@ -113,6 +116,8 @@ int				ft_key_hook(int keycode, t_cube *cb);
 void			raycasting(t_cube *cb);
 void			put_floor_sky(t_cube *cb);
 void			ft_draw_pixels(int x, int y, int color, t_cube *cb);
+void			wall_selector(t_cube *cb, int col, int index);
+void			offset(t_cube *cb, int x, int y);
 
 //				UTILS			//
 

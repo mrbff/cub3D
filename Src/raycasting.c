@@ -6,7 +6,7 @@
 /*   By: mbozzi <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/03 11:33:45 by mbozzi            #+#    #+#             */
-/*   Updated: 2023/04/05 19:39:15 by mbozzi           ###   ########.fr       */
+/*   Updated: 2023/04/06 16:07:58 by mbozzi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ void	put_floor_sky(t_cube *cb)
 	int	col;
 
 	i = -1;
- 	while (++i < WIN_HGT / 2)
+	while (++i < WIN_HGT / 2)
 	{
 		col = -1;
 		while (++col < WIN_WID)
@@ -40,8 +40,6 @@ void	drawline(t_cube *cb, int col)
 	int	index;
 	int	i;
 
-	cropup = 0;
-	cropdown = 0;
 	col_hgt = abs((int)(WIN_HGT / cb->ray.wall_dist));
 	if (col_hgt > WIN_HGT)
 	{
@@ -50,15 +48,16 @@ void	drawline(t_cube *cb, int col)
 		cropdown = cropup + 1;
 	}
 	else
-		index = ((WIN_HGT - col_hgt) / 2) * WIN_WID;
-	i = cropup;
-	int j = (i / col_hgt);
-	while (i < (col_hgt - cropdown))
 	{
-		ft_draw_pixels(col, (index / WIN_WID), ft_get_pixels(cb->ray.offset , j % 256, cb->tex1), cb);
+		index = ((WIN_HGT - col_hgt) / 2) * WIN_WID;
+		cropup = 0;
+		cropdown = 0;
+	}
+	i = cropup - 1;
+	while (++i < (col_hgt - cropdown))
+	{
+		wall_selector(cb, col, index);
 		index += WIN_WID;
-		i++;
-		j++;
 	}
 }
 
@@ -85,16 +84,7 @@ void	ray_dist(t_cube *cb, int x, int y)
 	else
 		cb->ray.wall_dist = fabs((y - cb->p_pos.y \
 	+ (1 - cb->ray.step.y) / 2) / cb->ray.dir.y);
-	if (cb->ray.side == 1)
-		cb->ray.wall = cb->ray.pos.x + ((y - cb->p_pos.y + (1 - cb->ray.step.y) / 2) / cb->ray.dir.y) * cb->ray.dir.x;
-	else
-		cb->ray.wall = cb->ray.pos.y + ((x - cb->p_pos.x + (1 - cb->ray.step.x) / 2) / cb->ray.dir.x) * cb->ray.dir.y;
-	cb->ray.wall -= floor(cb->ray.wall);
-	cb->ray.offset = (int)(cb->ray.wall * IMG_WID);
-	if (cb->ray.side == 0 && cb->ray.dir.x > 0)
-		cb->ray.offset = IMG_WID - cb->ray.offset - 1;
-	if (cb->ray.side == 1 && cb->ray.dir.y < 0)
-		cb->ray.offset = IMG_WID - cb->ray.offset - 1;
+	offset(cb, x, y);
 }
 
 void	ray_dir(t_cube *cb, int x, int y)
