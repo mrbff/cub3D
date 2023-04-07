@@ -6,7 +6,7 @@
 /*   By: mbozzi <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/31 18:53:31 by mbozzi            #+#    #+#             */
-/*   Updated: 2023/04/07 14:22:27 by mbozzi           ###   ########.fr       */
+/*   Updated: 2023/04/07 18:12:35 by mbozzi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,7 +53,7 @@ static void	init_dir(t_cube *cb)
 static int	game_init(t_cube *cb)
 {
 	cb->mlx = mlx_init();
-	cb->mlx_win = mlx_new_window(cb->mlx, WIN_WID, WIN_HGT, "cube3D");
+	cb->mlx_win = mlx_new_window(cb->mlx, WIN_WID, WIN_HGT, "cub3D");
 	cb->img->mlx_img = mlx_new_image(cb->mlx, WIN_WID, WIN_HGT);
 	if (!cb->img->mlx_img)
 		return (1);
@@ -85,7 +85,7 @@ int	main(int ac, char **av)
 		init_dir(cb);
 		texture_init(cb);
 		raycasting(cb);
-		mlx_key_hook(cb->mlx_win, ft_key_hook, cb);
+		mlx_hook(cb->mlx_win, 2, 1L << 0, ft_key_hook, cb);
 		mlx_hook(cb->mlx_win, 17, 0, ft_destroy, cb);
 		mlx_loop(cb->mlx);
 	}

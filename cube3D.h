@@ -6,7 +6,7 @@
 /*   By: mbozzi <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/31 18:16:05 by mbozzi            #+#    #+#             */
-/*   Updated: 2023/04/07 16:10:38 by mbozzi           ###   ########.fr       */
+/*   Updated: 2023/04/07 16:19:03 by mbozzi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,15 +88,15 @@ typedef struct s_img
 typedef struct s_cube
 {
 	t_img		*img;
-	void		*mlx_win;
-	void		*mlx;
 	t_matrix	map;
-	char		*path;
 	t_vector	p_pos;
 	t_vector	p_dir;
 	t_vector	cam;
 	t_ray		ray;
 	t_img		**tex;
+	void		*mlx;
+	void		*mlx_win;
+	char		*path;
 	char		**tex_path;
 	int			floor;
 	int			ceil;
