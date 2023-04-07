@@ -123,5 +123,6 @@ int				ft_destroy(t_cube *ptr);
 unsigned int	ft_color_converter(int r, int g, int b);
 double			delta(t_cube *cb, char flag);
 int				ft_get_pixels(int x, int y, t_img *img);
+char			*extr_num(char	*s);
 
 #endif

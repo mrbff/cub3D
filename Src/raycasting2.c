@@ -63,3 +63,10 @@ void	offset(t_cube *cb, int x, int y)
 	if (cb->ray.side == 1 && cb->ray.dir.y < 0)
 		cb->ray.offset = IMG_WID - cb->ray.offset - 1;
 }
+
+char	*extr_num(char	*s)
+{
+	while (*s && !ft_isdigit(*s))
+		s++;
+	return (s);
+}

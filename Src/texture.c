@@ -49,7 +49,7 @@ int	get_color(char *line)
 
 	trim = ext_path(line, 1);
 	color = ft_split(trim, ',');
-	ret = ft_color_converter(ft_atoi(color[0]),
+	ret = ft_color_converter(ft_atoi(extr_num(color[0])),
 			ft_atoi(color[1]), ft_atoi(color[2]));
 	i = -1;
 	while (color[++i])
