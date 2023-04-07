@@ -99,12 +99,13 @@ typedef struct s_cube
 	char		**tex_path;
 	int			floor;
 	int			ceil;
+	char		in_dir;
 }				t_cube;
 
 //				MAP				//
 
-int				ft_matrix(t_cube **cb, char *path);
-int				check_map(t_cube **cb, char *path);
+int				ft_matrix(t_cube *cb, char *path);
+int				check_map(t_cube *cb, char *path);
 
 //				GAME			//
 

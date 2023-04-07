@@ -27,55 +27,55 @@ int	start_controll(char *line)
 	return (0);
 }
 
-void	get_matrix(t_cube **cb, char *path)
+void	get_matrix(t_cube *cb, char *path)
 {
 	static char	*buff;
 
 	if (!buff)
 		buff = ft_calloc(sizeof(char), 1);
-	(*cb)->map.fd = open(path, O_RDONLY);
-	(*cb)->map.line = get_next_line((*cb)->map.fd);
-	while (start_controll((*cb)->map.line))
+	cb->map.fd = open(path, O_RDONLY);
+	cb->map.line = get_next_line(cb->map.fd);
+	while (start_controll(cb->map.line))
 	{
-		free((*cb)->map.line);
-		(*cb)->map.line = get_next_line((*cb)->map.fd);
+		free(cb->map.line);
+		cb->map.line = get_next_line(cb->map.fd);
 	}
-	while ((*cb)->map.line != NULL)
+	while (cb->map.line != NULL)
 	{
-		buff = ft_strjoin2(buff, (*cb)->map.line);
-		free((*cb)->map.line);
-		(*cb)->map.line = get_next_line((*cb)->map.fd);
+		buff = ft_strjoin2(buff, cb->map.line);
+		free(cb->map.line);
+		cb->map.line = get_next_line(cb->map.fd);
 	}
-	close((*cb)->map.fd);
-	free((*cb)->map.line);
-	(*cb)->map.mat = ft_split(buff, '\n');
+	close(cb->map.fd);
+	free(cb->map.line);
+	cb->map.mat = ft_split(buff, '\n');
 	free(buff);
 }
 
-int	ft_matrix(t_cube **cb, char *path)
+int	ft_matrix(t_cube *cb, char *path)
 {
-	(*cb)->map.lines = 0;
-	(*cb)->map.fd = open(path, O_RDONLY);
-	if ((*cb)->map.fd == -1)
+	cb->map.lines = 0;
+	cb->map.fd = open(path, O_RDONLY);
+	if (cb->map.fd == -1)
 	{
-		close((*cb)->map.fd);
+		close(cb->map.fd);
 		free(path);
 		return (1);
 	}
-	(*cb)->map.line = get_next_line((*cb)->map.fd);
-	while (start_controll((*cb)->map.line))
+	cb->map.line = get_next_line(cb->map.fd);
+	while (start_controll(cb->map.line))
 	{
-		free((*cb)->map.line);
-		(*cb)->map.line = get_next_line((*cb)->map.fd);
+		free(cb->map.line);
+		cb->map.line = get_next_line(cb->map.fd);
 	}
-	while ((*cb)->map.line != NULL)
+	while (cb->map.line != NULL)
 	{
-		free((*cb)->map.line);
-		(*cb)->map.line = get_next_line((*cb)->map.fd);
-		(*cb)->map.lines++;
+		free(cb->map.line);
+		cb->map.line = get_next_line(cb->map.fd);
+		cb->map.lines++;
 	}
-	free((*cb)->map.line);
-	close((*cb)->map.fd);
+	free(cb->map.line);
+	close(cb->map.fd);
 	get_matrix(cb, path);
 	return (0);
 }

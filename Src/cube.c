@@ -12,6 +12,38 @@
 
 #include "../cube3D.h"
 
+
+void init_dir(t_cube *cb)
+{
+	if (cb->in_dir == 'N')
+	{
+		cb->cam.x = 0;
+		cb->cam.y = FOV;
+		cb->p_dir.x = -1;
+		cb->p_dir.y = 0;
+	}
+	else if (cb->in_dir == 'S')
+	{
+		cb->cam.x = 0;
+		cb->cam.y = -FOV;
+		cb->p_dir.x = 1;
+		cb->p_dir.y = 0;
+	}
+	else if (cb->in_dir == 'E')
+	{
+		cb->cam.x = FOV;
+		cb->cam.y = 0;
+		cb->p_dir.x = 0;
+		cb->p_dir.y = 1;
+	}
+	else if (cb->in_dir == 'W')
+	{
+		cb->cam.x = -FOV;
+		cb->cam.y = 0;
+		cb->p_dir.x = 0;
+		cb->p_dir.y = -1;
+	}
+}
 int	game_init(t_cube *cb)
 {
 	cb->mlx = mlx_init();
@@ -25,10 +57,6 @@ int	game_init(t_cube *cb)
 			&cb->img->endian);
 	if (!cb->img->data)
 		return (1);
-	cb->cam.x = 0;
-	cb->cam.y = FOV;
-	cb->p_dir.x = -1;
-	cb->p_dir.y = 0;
 	return (0);
 }
 
@@ -42,8 +70,9 @@ int	main(int ac, char **av)
 	if (!cb->img || game_init(cb))
 		return (EXIT_FAILURE);
 	cb->path = ft_strjoin("./Maps/", av[1]);
-	if (check_map(&cb, cb->path) == 1)
+	if (check_map(cb, cb->path) == 1)
 		return (EXIT_FAILURE);
+	init_dir(cb);
 	texture_init(cb);
 	raycasting(cb);
 	mlx_key_hook(cb->mlx_win, ft_key_hook, cb);

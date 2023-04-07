@@ -78,6 +78,8 @@ static void	ft_rotate(int keycode, t_cube *cb)
 		cb->cam.x = cb->cam.x * cos(-ROTSPEED) - cb->cam.y * sin(-ROTSPEED);
 		cb->cam.y = old * sin(-ROTSPEED) + cb->cam.y * cos(-ROTSPEED);
 	}
+	printf("\ndir.x = %f\ndir.y = %f", cb->p_dir.x, cb->p_dir.y);
+	printf("\ndir.x = %f\ndir.y = %f\n\n", cb->cam.x, cb->cam.y);
 }
 
 int	ft_key_hook(int keycode, t_cube *cb)
