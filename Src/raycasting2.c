@@ -6,11 +6,11 @@
 /*   By: mbozzi <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/06 15:23:26 by mbozzi            #+#    #+#             */
-/*   Updated: 2023/04/07 16:03:04 by mbozzi           ###   ########.fr       */
+/*   Updated: 2023/04/07 18:28:23 by mbozzi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../cube3D.h"
+#include "../cub3D.h"
 
 void	put_floor_sky(t_cube *cb)
 {

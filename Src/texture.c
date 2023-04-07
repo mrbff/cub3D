@@ -6,11 +6,11 @@
 /*   By: mbozzi <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/06 16:31:00 by mbozzi            #+#    #+#             */
-/*   Updated: 2023/04/06 19:50:44 by mbozzi           ###   ########.fr       */
+/*   Updated: 2023/04/07 18:28:26 by mbozzi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../cube3D.h"
+#include "../cub3D.h"
 
 char	*ext_path(char *line, int flag)
 {

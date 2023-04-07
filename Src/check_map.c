@@ -6,11 +6,11 @@
 /*   By: mbozzi <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/01 16:09:39 by mbozzi            #+#    #+#             */
-/*   Updated: 2023/04/07 10:39:56 by mabaffo          ###   ########.fr       */
+/*   Updated: 2023/04/07 18:28:13 by mbozzi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../cube3D.h"
+#include "../cub3D.h"
 
 int	wall_controll(t_cube *cb, int x, int y, int flag)
 {

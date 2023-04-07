@@ -6,11 +6,11 @@
 /*   By: mbozzi <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/03 11:33:45 by mbozzi            #+#    #+#             */
-/*   Updated: 2023/04/07 14:41:41 by mbozzi           ###   ########.fr       */
+/*   Updated: 2023/04/07 18:28:19 by mbozzi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../cube3D.h"
+#include "../cub3D.h"
 
 static int	y_tex(int i, int col_hgt)
 {

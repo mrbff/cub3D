@@ -6,11 +6,11 @@
 /*   By: mbozzi <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/01 16:02:18 by mbozzi            #+#    #+#             */
-/*   Updated: 2023/04/07 16:02:58 by mbozzi           ###   ########.fr       */
+/*   Updated: 2023/04/07 18:28:30 by mbozzi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../cube3D.h"
+#include "../cub3D.h"
 
 void	ft_draw_pixels(int x, int y, int color, t_cube *cb)
 {
