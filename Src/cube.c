@@ -6,7 +6,7 @@
 /*   By: mbozzi <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/31 18:53:31 by mbozzi            #+#    #+#             */
-/*   Updated: 2023/04/07 10:46:01 by mabaffo          ###   ########.fr       */
+/*   Updated: 2023/04/07 14:22:27 by mbozzi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,18 +70,25 @@ int	main(int ac, char **av)
 {
 	t_cube	*cb;
 
-	(void)ac;
-	cb = malloc(sizeof(t_cube));
-	cb->img = malloc(sizeof(t_img));
-	if (!cb->img || game_init(cb))
-		return (EXIT_FAILURE);
-	cb->path = ft_strjoin("./Maps/", av[1]);
-	if (check_map(cb, cb->path) == 1)
-		return (EXIT_FAILURE);
-	init_dir(cb);
-	texture_init(cb);
-	raycasting(cb);
-	mlx_key_hook(cb->mlx_win, ft_key_hook, cb);
-	mlx_hook(cb->mlx_win, 17, 0, ft_destroy, cb);
-	mlx_loop(cb->mlx);
+	if (ac == 2)
+	{
+		cb = malloc(sizeof(t_cube));
+		cb->path = ft_strjoin("./Maps/", av[1]);
+		if (check_map(cb, cb->path) == 1)
+		{
+			free(cb);
+			return (EXIT_FAILURE);
+		}
+		cb->img = malloc(sizeof(t_img));
+		if (!cb->img || game_init(cb))
+			return (EXIT_FAILURE);
+		init_dir(cb);
+		texture_init(cb);
+		raycasting(cb);
+		mlx_key_hook(cb->mlx_win, ft_key_hook, cb);
+		mlx_hook(cb->mlx_win, 17, 0, ft_destroy, cb);
+		mlx_loop(cb->mlx);
+	}
+	else
+		write(STDERR_FILENO, "\033[0;31mError\nInvalid arguments\n", 32);
 }

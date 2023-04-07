@@ -6,7 +6,7 @@
 /*   By: mbozzi <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/01 15:59:46 by mbozzi            #+#    #+#             */
-/*   Updated: 2023/04/05 15:45:41 by mbozzi           ###   ########.fr       */
+/*   Updated: 2023/04/07 14:23:44 by mbozzi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,8 +78,6 @@ static void	ft_rotate(int keycode, t_cube *cb)
 		cb->cam.x = cb->cam.x * cos(-ROTSPEED) - cb->cam.y * sin(-ROTSPEED);
 		cb->cam.y = old * sin(-ROTSPEED) + cb->cam.y * cos(-ROTSPEED);
 	}
-	printf("\ndir.x = %f\ndir.y = %f", cb->p_dir.x, cb->p_dir.y);
-	printf("\ndir.x = %f\ndir.y = %f\n\n", cb->cam.x, cb->cam.y);
 }
 
 int	ft_key_hook(int keycode, t_cube *cb)
