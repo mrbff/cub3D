@@ -6,7 +6,7 @@
 /*   By: mbozzi <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/01 16:09:39 by mbozzi            #+#    #+#             */
-/*   Updated: 2023/04/06 17:05:02 by mbozzi           ###   ########.fr       */
+/*   Updated: 2023/04/07 10:39:56 by mabaffo          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,9 +57,7 @@ int	lines_controll(t_cube *cb, int x, int y, int len)
 		x++;
 		y = 0;
 	}
-	if (wall_controll(cb, x, y, 0) == 1)
-		return (1);
-	return (0);
+	return ((wall_controll(cb, x, y, 0) == 1));
 }
 
 int	check_map_error(t_cube *cb)
