@@ -1,26 +1,26 @@
-SO  ./Texture/stone.xpm
+SO  ./Texture/doom4.xpm
 
-NO     ./Texture/wall.xpm
+NO     ./Texture/doom1.xpm
 
-EA ./Texture/tex3.xpm
+EA ./Texture/doom2.xpm
 
-WE   ./Texture/tex2.xpm
-
-
+WE   ./Texture/doom3.xpm
 
 
-F      220,100,0
 
-C  225,30,0
+
+F  96,96,96
+
+C  102,0,0
 
 
 
 
 111111111111111
-100000000000001
-100001000100001
+100010000000001
+100011000100001
 100000001100001
 1000000N0000001
-100000000000001
-100000000000001
+110000000010001
+100100010010011
 111111111111111
