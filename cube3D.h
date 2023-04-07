@@ -6,7 +6,7 @@
 /*   By: mbozzi <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/31 18:16:05 by mbozzi            #+#    #+#             */
-/*   Updated: 2023/04/06 18:35:25 by mbozzi           ###   ########.fr       */
+/*   Updated: 2023/04/07 16:10:38 by mbozzi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,11 +24,15 @@
 # include <string.h>
 # include <math.h>
 
+//			WIN & IMG		//
+
 # define WIN_WID 1200
 # define WIN_HGT 720
 # define IMG_WID 256
 # define IMG_HGT 256
 # define FOV 0.66
+
+//			KEYS			//
 
 # define ESC 65307
 # define KEY_W 119
@@ -38,15 +42,12 @@
 # define ARROW_LETF 65361
 # define ARROW_RIGHT 65363
 
-# define PI 3.14159
+//			MOVEMENT		//
+
 # define MOVSPEED 0.1
 # define ROTSPEED 0.05
 
-/* # define EAST 0
-# define NORD PI / 2
-# define WEST PI
-# define SUD  PI / 2 * 3
- */
+//			STRUCTS			//
 
 typedef struct s_vector
 {

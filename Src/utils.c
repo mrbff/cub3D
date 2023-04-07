@@ -6,7 +6,7 @@
 /*   By: mbozzi <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/01 16:02:18 by mbozzi            #+#    #+#             */
-/*   Updated: 2023/04/06 18:28:38 by mbozzi           ###   ########.fr       */
+/*   Updated: 2023/04/07 16:02:58 by mbozzi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,11 +72,3 @@ unsigned int	ft_color_converter(int r, int g, int b)
 	return (r << 16 | g << 8 | b);
 }
 
-double	delta(t_cube *cb, char flag)
-{
-	if (flag == 'x')
-		return (sqrt(1 + pow(cb->ray.dir.y, 2) / pow(cb->ray.dir.x, 2)));
-	else if (flag == 'y')
-		return (sqrt(1 + pow(cb->ray.dir.x, 2) / pow(cb->ray.dir.y, 2)));
-	return (0);
-}

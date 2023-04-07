@@ -6,7 +6,7 @@
 /*   By: mbozzi <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/06 15:23:26 by mbozzi            #+#    #+#             */
-/*   Updated: 2023/04/07 14:16:02 by mbozzi           ###   ########.fr       */
+/*   Updated: 2023/04/07 16:03:04 by mbozzi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,4 +69,13 @@ char	*extr_num(char	*s)
 	while (*s && !ft_isdigit(*s))
 		s++;
 	return (s);
+}
+
+double	delta(t_cube *cb, char flag)
+{
+	if (flag == 'x')
+		return (sqrt(1 + pow(cb->ray.dir.y, 2) / pow(cb->ray.dir.x, 2)));
+	else if (flag == 'y')
+		return (sqrt(1 + pow(cb->ray.dir.x, 2) / pow(cb->ray.dir.y, 2)));
+	return (0);
 }

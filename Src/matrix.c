@@ -21,7 +21,7 @@ int	start_controll(char *line)
 		return (1);
 	while (line[++i])
 	{
-		if ((line[i] != '1' && line[i] != '\n'))
+		if ((line[i] != '1' && line[i] != '\n' && line[i] != ' '))
 			return (1);
 	}
 	return (0);
