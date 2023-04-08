@@ -107,6 +107,7 @@ typedef struct s_cube
 
 int				ft_matrix(t_cube *cb, char *path);
 int				check_map(t_cube *cb, char *path);
+int				not_fenced(char **map, int x, int y);
 
 //				GAME			//
 

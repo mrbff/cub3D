@@ -1,6 +1,6 @@
 NAME = cub3D
 
-SRC = cube.c matrix.c check_map.c movement.c utils.c raycasting.c raycasting2.c texture.c
+SRC = cube.c matrix.c check_map.c movement.c utils.c raycasting.c raycasting2.c texture.c fence.c
 
 SRC_DIR = ./Src/
 

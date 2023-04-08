@@ -49,8 +49,8 @@ int	check_map_error(t_cube *cb)
 	cb->map.y = 0;
 	if (lines_controll(cb, 0, 0))
 		return (1);
-/*	if (isnt_fenced(matdup(cb->map.mat, cb->p_pos.x, cb->p_pos.y)))
-		return (1);*/
+	if (not_fenced(cb->map.mat, cb->p_pos.x, cb->p_pos.y))
+		return (1);
 	return (0);
 }
 
