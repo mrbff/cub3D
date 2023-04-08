@@ -12,41 +12,24 @@
 
 #include "../cub3D.h"
 
-int	wall_controll(t_cube *cb, int x, int y, int flag)
+int	lines_controll(t_cube *cb, int x, int y)
 {
-	if (flag == 1)
+	cb->in_dir = 0;
+	while (cb->map.mat[x])
 	{
-		if (cb->map.mat[x][y + 1] == '1' && cb->map.mat[x][y - 1] == '1'\
-		&& cb->map.mat[x + 1][y] == '1' && cb->map.mat[x - 1][y] == '1')
-			return (1);
-	}
-	if (flag == 0)
-	{
+		y = 0;
 		while (cb->map.mat[x][y])
-		{
-			if (cb->map.mat[x][y] != '1')
-				return (1);
-			y++;
-		}
-	}
-	return (0);
-}
-
-int	lines_controll(t_cube *cb, int x, int y, int len)
-{
-	while (x < cb->map.lines - 1)
-	{
-		if (cb->map.mat[x][0] != '1' || cb->map.mat[x][len - 1] != '1')
-			return (1);
-		while (cb->map.mat[x][y] != '\0')
 		{
 			if (cb->map.mat[x][y] != '0' && cb->map.mat[x][y] != '1' &&
 				cb->map.mat[x][y] != 'N' && cb->map.mat[x][y] != 'S' &&
-				cb->map.mat[x][y] != 'E' && cb->map.mat[x][y] != 'W')
+				cb->map.mat[x][y] != 'E' && cb->map.mat[x][y] != 'W' &&
+				cb->map.mat[x][y] != 32)
 				return (1);
 			else if (cb->map.mat[x][y] == 'N' || cb->map.mat[x][y] == 'S'
 				|| cb->map.mat[x][y] == 'E' || cb->map.mat[x][y] == 'W')
 			{
+				if (cb->in_dir)
+                    return (1);
 				cb->p_pos.x = (double)x;
 				cb->p_pos.y = (double)y;
 				cb->in_dir = cb->map.mat[x][y];
@@ -55,21 +38,19 @@ int	lines_controll(t_cube *cb, int x, int y, int len)
 			y++;
 		}
 		x++;
-		y = 0;
 	}
-	return ((wall_controll(cb, x, y, 0) == 1));
+	cb->map.lines = x;
+	return (0);
 }
 
 int	check_map_error(t_cube *cb)
 {
 	cb->map.x = 0;
 	cb->map.y = 0;
-	if (wall_controll(cb, cb->map.x, cb->map.y, 0) == 1)
+	if (lines_controll(cb, 0, 0))
 		return (1);
-	cb->map.x++;
-	if (lines_controll(cb, cb->map.x, cb->map.y,
-			ft_strlen(cb->map.mat[0])) == 1)
-		return (1);
+/*	if (isnt_fenced(matdup(cb->map.mat, cb->p_pos.x, cb->p_pos.y)))
+		return (1);*/
 	return (0);
 }
 
