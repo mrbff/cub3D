@@ -6,11 +6,21 @@
 /*   By: mbozzi <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/01 16:09:39 by mbozzi            #+#    #+#             */
-/*   Updated: 2023/04/07 18:28:13 by mbozzi           ###   ########.fr       */
+/*   Updated: 2023/04/10 18:43:45 by mbozzi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../cub3D.h"
+
+int	map_valid_char(t_cube *cb, int x, int y)
+{
+	if (cb->map.mat[x][y] != '0' && cb->map.mat[x][y] != '1' &&
+				cb->map.mat[x][y] != 'N' && cb->map.mat[x][y] != 'S' &&
+				cb->map.mat[x][y] != 'E' && cb->map.mat[x][y] != 'W' &&
+				cb->map.mat[x][y] != ' ' && cb->map.mat[x][y] != '\t')
+		return (1);
+	return (0);
+}
 
 int	lines_controll(t_cube *cb, int x, int y)
 {
@@ -20,16 +30,12 @@ int	lines_controll(t_cube *cb, int x, int y)
 		y = 0;
 		while (cb->map.mat[x][y])
 		{
-			if (cb->map.mat[x][y] != '0' && cb->map.mat[x][y] != '1' &&
-				cb->map.mat[x][y] != 'N' && cb->map.mat[x][y] != 'S' &&
-				cb->map.mat[x][y] != 'E' && cb->map.mat[x][y] != 'W' &&
-				cb->map.mat[x][y] != 32)
-				return (1);
-			else if (cb->map.mat[x][y] == 'N' || cb->map.mat[x][y] == 'S'
+			map_valid_char(cb, x, y);
+			if (cb->map.mat[x][y] == 'N' || cb->map.mat[x][y] == 'S'
 				|| cb->map.mat[x][y] == 'E' || cb->map.mat[x][y] == 'W')
 			{
 				if (cb->in_dir)
-                    return (1);
+					return (1);
 				cb->p_pos.x = (double)x;
 				cb->p_pos.y = (double)y;
 				cb->in_dir = cb->map.mat[x][y];

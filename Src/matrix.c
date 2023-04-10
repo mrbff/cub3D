@@ -17,23 +17,25 @@ int	start_controll(char *line)
 	int	i;
 
 	i = -1;
-	if (!line || line[0] == '\n')
+	if (!line)
+		return (0);
+	if (line[0] == '\n')
 		return (1);
 	while (line[++i])
 	{
-		if ((line[i] != '1' && line[i] != '\n' && line[i] != ' '))
+		if ((line[i] != '1' && line[i] != ' '
+				&& line[i] != '\n' && line[i] != '\t'))
 			return (1);
 	}
 	return (0);
 }
 
-void	get_matrix(t_cube *cb, char *path)
+void	get_matrix(t_cube *cb)
 {
 	static char	*buff;
 
 	if (!buff)
 		buff = ft_calloc(sizeof(char), 1);
-	cb->map.fd = open(path, O_RDONLY);
 	cb->map.line = get_next_line(cb->map.fd);
 	while (start_controll(cb->map.line))
 	{
@@ -79,20 +81,6 @@ int	ft_matrix(t_cube *cb, char *path)
 		free(path);
 		return (1);
 	}
-	cb->map.line = get_next_line(cb->map.fd);
-	while (start_controll(cb->map.line))
-	{
-		free(cb->map.line);
-		cb->map.line = get_next_line(cb->map.fd);
-	}
-	while (cb->map.line != NULL)
-	{
-		free(cb->map.line);
-		cb->map.line = get_next_line(cb->map.fd);
-		cb->map.lines++;
-	}
-	free(cb->map.line);
-	close(cb->map.fd);
-	get_matrix(cb, path);
+	get_matrix(cb);
 	return (0);
 }
