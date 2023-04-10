@@ -52,11 +52,28 @@ void	get_matrix(t_cube *cb, char *path)
 	free(buff);
 }
 
+int	ctrl_ext(char *path)
+{
+	char	**ext;
+	int		ret;
+	int		i;
+
+	if (!ft_strchr(path, '.'))
+		return (1);
+	ext = ft_split(path, '.');
+	ret = ft_strncmp(ext[1], "cub", 4);
+	i = -1;
+	while (ext[++i])
+		free(ext[i]);
+	free(ext);
+	return (ret);
+}
+
 int	ft_matrix(t_cube *cb, char *path)
 {
 	cb->map.lines = 0;
 	cb->map.fd = open(path, O_RDONLY);
-	if (cb->map.fd == -1)
+	if (cb->map.fd == -1 || ctrl_ext(path))
 	{
 		close(cb->map.fd);
 		free(path);
