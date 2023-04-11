@@ -53,7 +53,11 @@ static void	init_dir(t_cube *cb)
 static int	game_init(t_cube *cb)
 {
 	cb->mlx = mlx_init();
+	if (!cb->mlx)
+		return (1);
 	cb->mlx_win = mlx_new_window(cb->mlx, WIN_WID, WIN_HGT, "cub3D");
+	if (!cb->mlx_win)
+		return (1);
 	cb->img->mlx_img = mlx_new_image(cb->mlx, WIN_WID, WIN_HGT);
 	if (!cb->img->mlx_img)
 		return (1);

@@ -72,3 +72,16 @@ unsigned int	ft_color_converter(int r, int g, int b)
 	return (r << 16 | g << 8 | b);
 }
 
+int ft_access(char *path)
+{
+	int fd;
+
+	fd = open(path, O_RDONLY);
+	if (fd < 0)
+		 return (1);
+	else
+	{
+		close(fd);
+		return (0);
+	}
+}

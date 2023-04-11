@@ -4,11 +4,11 @@ int flood_map(char **map, int x, int y)
 {
     if (!map[x][y] || map[x][y] == 32)
         return (1);
-    else if (map[x][y] == '1')
+    else if (map[x][y] == '1' || map[x][y] == 'x')
         return (0);
     else
     {
-        map[x][y] = '1';
+        map[x][y] = 'x';
         return
             (flood_map(map, x , y + 1) ||
             flood_map(map, x + 1, y + 1) ||
@@ -52,7 +52,10 @@ int not_fenced(char **map, int x, int y)
     ret = flood_map(dup, x, y);
     i = -1;
     while (dup[++i])
+    {
+        printf("%s\n", dup[i]);
         free(dup[i]);
+    }
     free(dup);
     return (ret);
 }

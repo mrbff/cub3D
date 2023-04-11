@@ -114,6 +114,8 @@ void	texture_init(t_cube *cb)
 	i = -1;
 	while (++i < 4)
 	{
+		if (ft_access(cb->tex_path[i]))
+			exit(121 + printf("Error\n"));
 		cb->tex[i]->mlx_img = mlx_xpm_file_to_image(cb->mlx, cb->tex_path[i],
 				&x, &y);
 		cb->tex[i]->data = mlx_get_data_addr(cb->tex[i]->mlx_img,
