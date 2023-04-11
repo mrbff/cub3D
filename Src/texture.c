@@ -6,7 +6,7 @@
 /*   By: mbozzi <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/06 16:31:00 by mbozzi            #+#    #+#             */
-/*   Updated: 2023/04/07 18:28:26 by mbozzi           ###   ########.fr       */
+/*   Updated: 2023/04/11 13:13:33 by mabaffo          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -103,24 +103,22 @@ void	texture_init(t_cube *cb)
 	int	y;
 	int	i;
 
-	i = -1;
 	x = IMG_WID;
 	y = IMG_HGT;
 	cb->tex_path = ft_calloc(sizeof(char *), 5);
 	texture_path(cb);
 	cb->tex = ft_calloc(sizeof(t_img *), 5);
-	while (++i < 4)
-		cb->tex[i] = ft_calloc(sizeof(t_img), 1);
 	i = -1;
 	while (++i < 4)
+		cb->tex[i] = ft_calloc(sizeof(t_img), 1);
+	while (--i >= 0)
 	{
 		if (ft_access(cb->tex_path[i]))
 			exit(121 + printf("Error\n"));
 		cb->tex[i]->mlx_img = mlx_xpm_file_to_image(cb->mlx, cb->tex_path[i],
 				&x, &y);
 		cb->tex[i]->data = mlx_get_data_addr(cb->tex[i]->mlx_img,
-				&cb->tex[i]->bits_per_pixel,
-				&cb->tex[i]->line_length,
+				&cb->tex[i]->bits_per_pixel, &cb->tex[i]->line_length,
 				&cb->tex[i]->endian);
 		free(cb->tex_path[i]);
 	}

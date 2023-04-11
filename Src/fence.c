@@ -1,58 +1,70 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   fence.c                                            :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: mabaffo <marvin@42.fr>                     +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/04/11 12:58:56 by mabaffo           #+#    #+#             */
+/*   Updated: 2023/04/11 13:05:57 by mabaffo          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../cub3D.h"
 
-int flood_map(char **map, int x, int y)
+int	flood_map(char **map, int x, int y)
 {
-    if (!map[x][y] || map[x][y] == 32)
-        return (1);
-    else if (map[x][y] == '1' || map[x][y] == 'x')
-        return (0);
-    else
-    {
-        map[x][y] = 'x';
-        return
-            (flood_map(map, x , y + 1) ||
-            flood_map(map, x + 1, y + 1) ||
-            flood_map(map, x + 1 , y) ||
-            flood_map(map, x , y - 1) ||
-            flood_map(map, x - 1, y - 1) ||
-            flood_map(map, x - 1, y) ||
-            flood_map(map, x + 1, y - 1) ||
-            flood_map(map, x - 1, y + 1));
-    }
+	if (!map[x][y] || map[x][y] == 32)
+		return (1);
+	else if (map[x][y] == '1' || map[x][y] == 'x')
+		return (0);
+	else
+	{
+		map[x][y] = 'x';
+		return (
+			flood_map(map, x, y + 1)
+			|| flood_map(map, x + 1, y + 1)
+			|| flood_map(map, x + 1, y)
+			|| flood_map(map, x, y - 1)
+			|| flood_map(map, x - 1, y - 1)
+			|| flood_map(map, x - 1, y)
+			|| flood_map(map, x + 1, y - 1)
+			|| flood_map(map, x - 1, y + 1));
+	}
 }
 
-char **matdup(char **mat)
+char	**matdup(char **mat)
 {
-    int i;
-    char **dup;
+	int		i;
+	char	**dup;
 
-    i = 0;
-    while (mat[i])
-        i++;
-    dup = ft_calloc(sizeof(char *), (i + 1));
-    if (!dup)
-        return (NULL);
-    while (--i >= 0)
-        dup[i] = ft_strdup(mat[i]);
-    return (dup);
+	i = 0;
+	while (mat[i])
+		i++;
+	dup = ft_calloc(sizeof(char *), (i + 1));
+	if (!dup)
+		return (NULL);
+	while (--i >= 0)
+		dup[i] = ft_strdup(mat[i]);
+	return (dup);
 }
 
-int not_fenced(char **map, int x, int y)
+int	not_fenced(char **map, int x, int y)
 {
-    char **dup;
-    int ret;
-    int i;
+	char	**dup;
+	int		ret;
+	int		i;
 
-    ret = 0;
-    dup = matdup(map);
-    if (!dup)
-        return (1);
-    ret = flood_map(dup, x, y);
-    i = -1;
-    while (dup[++i])
-        free(dup[i]);
-    free(dup);
-    return (ret);
+	ret = 0;
+	dup = matdup(map);
+	if (!dup)
+		return (1);
+	ret = flood_map(dup, x, y);
+	i = -1;
+	while (dup[++i])
+		free(dup[i]);
+	free(dup);
+	return (ret);
 }
 /* while (dup[++i])
     {

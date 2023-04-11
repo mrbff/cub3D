@@ -6,7 +6,7 @@
 /*   By: mbozzi <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/01 16:02:18 by mbozzi            #+#    #+#             */
-/*   Updated: 2023/04/07 18:28:30 by mbozzi           ###   ########.fr       */
+/*   Updated: 2023/04/11 13:08:08 by mabaffo          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,13 +72,13 @@ unsigned int	ft_color_converter(int r, int g, int b)
 	return (r << 16 | g << 8 | b);
 }
 
-int ft_access(char *path)
+int	ft_access(char *path)
 {
-	int fd;
+	int	fd;
 
 	fd = open(path, O_RDONLY);
 	if (fd < 0)
-		 return (1);
+		return (1);
 	else
 	{
 		close(fd);
