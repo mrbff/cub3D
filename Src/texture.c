@@ -6,7 +6,7 @@
 /*   By: mbozzi <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/06 16:31:00 by mbozzi            #+#    #+#             */
-/*   Updated: 2023/04/11 13:13:33 by mabaffo          ###   ########.fr       */
+/*   Updated: 2023/04/11 15:19:08 by mbozzi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -97,7 +97,7 @@ void	texture_path(t_cube *cb)
 	close(fd);
 }
 
-void	texture_init(t_cube *cb)
+int	texture_init(t_cube *cb)
 {
 	int	x;
 	int	y;
@@ -113,8 +113,8 @@ void	texture_init(t_cube *cb)
 		cb->tex[i] = ft_calloc(sizeof(t_img), 1);
 	while (--i >= 0)
 	{
-		if (ft_access(cb->tex_path[i]))
-			exit(121 + printf("Error\n"));
+		if (ft_access(cb, cb->tex_path[i]))
+			return (0);
 		cb->tex[i]->mlx_img = mlx_xpm_file_to_image(cb->mlx, cb->tex_path[i],
 				&x, &y);
 		cb->tex[i]->data = mlx_get_data_addr(cb->tex[i]->mlx_img,
@@ -123,4 +123,5 @@ void	texture_init(t_cube *cb)
 		free(cb->tex_path[i]);
 	}
 	free(cb->tex_path);
+	return (1);
 }

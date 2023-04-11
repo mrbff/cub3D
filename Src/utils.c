@@ -6,7 +6,7 @@
 /*   By: mbozzi <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/01 16:02:18 by mbozzi            #+#    #+#             */
-/*   Updated: 2023/04/11 13:08:08 by mabaffo          ###   ########.fr       */
+/*   Updated: 2023/04/11 15:21:07 by mbozzi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,7 +52,10 @@ int	ft_destroy(t_cube *ptr)
 	i = -1;
 	while (ptr->tex[++i])
 	{
-		mlx_destroy_image(ptr->mlx, ptr->tex[i]->mlx_img);
+		if (ptr->tex[i]->mlx_img)
+		{
+			mlx_destroy_image(ptr->mlx, ptr->tex[i]->mlx_img);
+		}
 		free(ptr->tex[i]);
 	}
 	free(ptr->tex);
@@ -72,13 +75,21 @@ unsigned int	ft_color_converter(int r, int g, int b)
 	return (r << 16 | g << 8 | b);
 }
 
-int	ft_access(char *path)
+int	ft_access(t_cube *cb, char *path)
 {
 	int	fd;
+	int	i;
 
 	fd = open(path, O_RDONLY);
 	if (fd < 0)
+	{
+		i = -1;
+		while (cb->tex_path[++i])
+			free(cb->tex_path[i]);
+		free(cb->tex_path);
+		write(STDERR_FILENO, "\033[0;31mError\nInvalid texture path\n", 35);
 		return (1);
+	}
 	else
 	{
 		close(fd);

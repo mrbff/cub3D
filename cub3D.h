@@ -6,7 +6,7 @@
 /*   By: mbozzi <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/31 18:16:05 by mbozzi            #+#    #+#             */
-/*   Updated: 2023/04/07 18:27:56 by mbozzi           ###   ########.fr       */
+/*   Updated: 2023/04/11 15:18:54 by mbozzi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -117,7 +117,7 @@ void			put_floor_sky(t_cube *cb);
 void			ft_draw_pixels(int x, int y, int color, t_cube *cb);
 void			wall_selector(t_cube *cb, int col, int index, int y);
 void			offset(t_cube *cb, int x, int y);
-void			texture_init(t_cube *cb);
+int				texture_init(t_cube *cb);
 
 //				UTILS			//
 
@@ -126,6 +126,6 @@ unsigned int	ft_color_converter(int r, int g, int b);
 double			delta(t_cube *cb, char flag);
 int				ft_get_pixels(int x, int y, t_img *img);
 char			*extr_num(char	*s);
-int				ft_access(char *path);
+int				ft_access(t_cube *cb, char *path);
 
 #endif

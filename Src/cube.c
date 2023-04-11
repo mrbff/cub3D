@@ -6,7 +6,7 @@
 /*   By: mbozzi <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/31 18:53:31 by mbozzi            #+#    #+#             */
-/*   Updated: 2023/04/07 18:28:12 by mbozzi           ###   ########.fr       */
+/*   Updated: 2023/04/11 15:20:40 by mbozzi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,7 +87,8 @@ int	main(int ac, char **av)
 		if (!cb->img || game_init(cb))
 			return (EXIT_FAILURE);
 		init_dir(cb);
-		texture_init(cb);
+		if (!texture_init(cb))
+			ft_destroy(cb);
 		raycasting(cb);
 		mlx_hook(cb->mlx_win, 2, 1L << 0, ft_key_hook, cb);
 		mlx_hook(cb->mlx_win, 17, 0, ft_destroy, cb);
