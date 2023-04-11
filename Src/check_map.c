@@ -6,7 +6,7 @@
 /*   By: mbozzi <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/01 16:09:39 by mbozzi            #+#    #+#             */
-/*   Updated: 2023/04/10 18:43:45 by mbozzi           ###   ########.fr       */
+/*   Updated: 2023/04/11 14:31:53 by mbozzi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,8 +36,8 @@ int	lines_controll(t_cube *cb, int x, int y)
 			{
 				if (cb->in_dir)
 					return (1);
-				cb->p_pos.x = (double)x;
-				cb->p_pos.y = (double)y;
+				cb->p_pos.x = (double)x + 0.5;
+				cb->p_pos.y = (double)y + 0.5;
 				cb->in_dir = cb->map.mat[x][y];
 				cb->map.mat[x][y] = '0';
 			}
