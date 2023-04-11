@@ -29,10 +29,9 @@ char **matdup(char **mat)
     i = 0;
     while (mat[i])
         i++;
-    dup = malloc(sizeof(char *) * i + 1);
+    dup = ft_calloc(sizeof(char *), (i + 1));
     if (!dup)
         return (NULL);
-    dup[i] = NULL;
     while (--i >= 0)
         dup[i] = ft_strdup(mat[i]);
     return (dup);
@@ -45,17 +44,18 @@ int not_fenced(char **map, int x, int y)
     int i;
 
     ret = 0;
-    dup = NULL;
     dup = matdup(map);
     if (!dup)
         return (1);
     ret = flood_map(dup, x, y);
     i = -1;
     while (dup[++i])
-    {
-        printf("%s\n", dup[i]);
         free(dup[i]);
-    }
     free(dup);
     return (ret);
 }
+/* while (dup[++i])
+    {
+        printf("%s\n", dup[i]);
+        free(dup[i]);
+    }*/
